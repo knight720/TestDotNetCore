@@ -21,5 +21,10 @@ namespace WebApplication1
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+
+        public static void Output(string message)
+        {
+            Console.WriteLine($"[{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}] {message}");
+        }
     }
 }

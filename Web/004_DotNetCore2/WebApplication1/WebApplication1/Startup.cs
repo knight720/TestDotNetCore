@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +26,7 @@ namespace WebApplication1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -40,6 +41,23 @@ namespace WebApplication1
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            appLifetime.ApplicationStarted.Register(() =>
+            {
+                Program.Output("ApplicationLifetime - Started");
+            });
+
+            appLifetime.ApplicationStopping.Register(() =>
+            {
+                Program.Output("ApplicationLifetime - Stopping");
+            });
+
+            appLifetime.ApplicationStopped.Register(() =>
+            {
+                Thread.Sleep(5 * 1000);
+                Program.Output("ApplicationLifetime - Stopped");
+            });
+
         }
     }
 }
