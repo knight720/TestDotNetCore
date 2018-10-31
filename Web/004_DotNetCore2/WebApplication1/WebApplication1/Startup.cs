@@ -35,6 +35,8 @@ namespace WebApplication1
             services.AddSingleton<ISampleSingleton, Sample>();
             // Singleton 也可以用以下方法註冊
             // services.AddSingleton<ISampleSingleton>(new Sample());
+
+            services.AddScoped<CustomService, CustomService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
