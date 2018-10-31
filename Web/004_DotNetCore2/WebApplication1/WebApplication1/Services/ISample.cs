@@ -5,7 +5,19 @@
         int Id { get; }
     }
 
-    public class Sample : ISample
+    public interface ISampleTransient : ISample
+    {
+    }
+
+    public interface ISampleScoped : ISample
+    {
+    }
+
+    public interface ISampleSingleton : ISample
+    {
+    }
+
+    public class Sample : ISampleTransient, ISampleScoped, ISampleSingleton
     {
         private static int _counter;
         private int _id;

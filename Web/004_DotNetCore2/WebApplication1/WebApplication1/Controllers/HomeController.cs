@@ -9,19 +9,31 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISample _sample;
+        private readonly ISample _transient;
+        private readonly ISample _scoped;
+        private readonly ISample _singleton;
 
-        public HomeController(ISample sample)
+        public HomeController(
+            ISampleTransient transient,
+            ISampleScoped scoped,
+            ISampleSingleton singleton)
         {
-            _sample = sample;
+            _transient = transient;
+            _scoped = scoped;
+            _singleton = singleton;
         }
 
-        public string Index()
+        public IActionResult Index()
         {
-            return $"[ISample]\r\n"
-                 + $"Id: {_sample.Id}\r\n"
-                 + $"HashCode: {_sample.GetHashCode()}\r\n"
-                 + $"Tpye: {_sample.GetType()}";
+            ViewBag.TransientId = _transient.Id;
+            ViewBag.TransientHashCode = _transient.GetHashCode();
+
+            ViewBag.ScopedId = _scoped.Id;
+            ViewBag.ScopedHashCode = _scoped.GetHashCode();
+
+            ViewBag.SingletonId = _singleton.Id;
+            ViewBag.SingletonHashCode = _singleton.GetHashCode();
+            return View();
         }
     }
 }
