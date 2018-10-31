@@ -19,6 +19,7 @@ namespace WebApplication1
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                //.UseWebRoot("public") //// 變更網站目錄
                 .UseStartup<Startup>()
                 .Build();
 
