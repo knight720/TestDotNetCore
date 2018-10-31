@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApplication1.Exteisions;
 
 namespace WebApplication1
 {
@@ -29,7 +30,9 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
         {
-            app.UseMiddleware<FirstMiddleware>();
+            //app.UseMiddleware<FirstMiddleware
+            //改用擴充方法
+            app.UseFirstMiddleware();
 
             app.Map("/second", mapApp =>
             {
