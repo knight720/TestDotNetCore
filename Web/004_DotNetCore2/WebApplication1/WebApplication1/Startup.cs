@@ -73,7 +73,13 @@ namespace WebApplication1
             }
 
             //// 預設檔案 - 嘗試請求預設檔案
+            //// default.htm, default.html, index.htm, index.html
             //app.UseDefaultFiles(); //// 會覆蓋專案預設的頁面
+            //// 自訂預設檔案
+            var defaultFilesOptions = new DefaultFilesOptions();
+            defaultFilesOptions.DefaultFileNames.Add("custom.html");
+            //app.UseDefaultFiles(defaultFilesOptions);
+
             //// 啟用靜態檔案 - 回傳請求的檔案
             app.UseStaticFiles();
             //// 啟用指定目錄
