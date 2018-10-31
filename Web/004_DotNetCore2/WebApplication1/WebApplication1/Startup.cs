@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +62,16 @@ namespace WebApplication1
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+
+                //// ÀÉ®×²M³æ
+                app.UseFileServer(new FileServerOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(env.ContentRootPath, @"bin")
+                    ),
+                    RequestPath = new PathString("/StaticFiles"),
+                    EnableDirectoryBrowsing = true
+                });
             }
             else
             {
@@ -110,7 +116,6 @@ namespace WebApplication1
                 Thread.Sleep(5 * 1000);
                 Program.Output("ApplicationLifetime - Stopped");
             });
-
         }
     }
 }
