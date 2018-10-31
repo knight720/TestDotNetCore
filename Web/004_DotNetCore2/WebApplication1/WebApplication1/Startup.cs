@@ -70,6 +70,7 @@ namespace WebApplication1
                 app.UseExceptionHandler("/Error");
             }
 
+            //// ±Ò¥ÎÀRºAÀÉ®×
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
