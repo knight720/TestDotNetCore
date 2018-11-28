@@ -35,6 +35,9 @@ namespace WebApplication1
             // services.AddSingleton<ISampleSingleton>(new Sample());
 
             services.AddScoped<CustomService, CustomService>();
+
+            //// 加入 Routing 的服務
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
