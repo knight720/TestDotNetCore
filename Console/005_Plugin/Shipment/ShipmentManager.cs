@@ -10,10 +10,8 @@ namespace Shipment
 
         public ShipmentManager()
         {
-            var assembly = Assembly.LoadFile(@"D:\Code\Test\TestDotNetCore\Console\005_Plugin\FirstShipment\bin\Debug\netstandard2.0\FirstShipment.dll");
-            var modules = assembly.GetLoadedModules();
-            modules.ToList().ForEach(i => Console.WriteLine(i.Name));
-            //this._shipment = (IShipment)assembly.CreateInstance("FirstShipment.FirstShipment");
+            var assembly = Assembly.LoadFile(@"D:\Code\TestDotNetCore\Console\005_Plugin\FirstShipment\bin\Debug\netstandard2.0\FirstShipment.dll");
+            this._shipment = (IShipment)assembly.CreateInstance("FirstShipment.FirstShipment");
         }
 
         public object GetCourier()
@@ -21,4 +19,5 @@ namespace Shipment
             return this._shipment.GetCourier();
         }
     }
+
 }
