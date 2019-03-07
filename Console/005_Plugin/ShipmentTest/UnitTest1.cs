@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using Shipment;
 
 namespace ShipmentTest
 {
@@ -8,7 +9,10 @@ namespace ShipmentTest
         [Fact]
         public void Test1()
         {
-
+            var manager = new ShipmentManager();
+            manager.GetCourier();
+            
+            Assert.True(true);
         }
     }
 }
