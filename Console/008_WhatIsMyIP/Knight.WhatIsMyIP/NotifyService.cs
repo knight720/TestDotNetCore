@@ -21,6 +21,8 @@ namespace Knight.WhatIsMyIP
 
         public async Task<string> Send(string message)
         {
+            if (string.IsNullOrEmpty(this._webhookURL)) return null;
+
             var httpClient = this._httpClientFactory.CreateClient();
             var data = new { text = message };
 

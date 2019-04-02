@@ -41,8 +41,8 @@ namespace Knight.WhatIsMyIP
             var notifyService = new NotifyService(config, httpClientFactory);
             notifyService.Send(sb.ToString()).Wait();
 
-            Console.WriteLine(sb.ToString());
-            Console.ReadLine();
+            //Console.WriteLine(sb.ToString());
+            //Console.ReadLine();
         }
     }
 }
