@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Knight.WhatIsMyIP
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // 取得本機名稱
             String strHostName = Dns.GetHostName();
@@ -26,6 +29,17 @@ namespace Knight.WhatIsMyIP
                 sb.AppendLine("IP #" + num + ": " + strIP);
                 num = num + 1;
             }
+
+            // 發送通知
+            var serviceProvider = new ServiceCollection().AddHttpClient().BuildServiceProvider();
+            var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
+
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var notifyService = new NotifyService(config, httpClientFactory);
+            notifyService.Send(sb.ToString()).Wait();
 
             Console.WriteLine(sb.ToString());
             Console.ReadLine();
