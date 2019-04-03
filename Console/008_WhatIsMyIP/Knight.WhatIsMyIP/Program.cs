@@ -26,7 +26,8 @@ namespace Knight.WhatIsMyIP
                 var strIP = ipaddress.ToString();
                 //// 排除IPv6
                 if (strIP.Contains(":")) continue;
-                sb.AppendLine("IP #" + num + ": " + strIP);
+                //sb.AppendLine("IP #" + num + ": " + strIP);
+                sb.AppendLine(strIP);
                 num = num + 1;
             }
 
