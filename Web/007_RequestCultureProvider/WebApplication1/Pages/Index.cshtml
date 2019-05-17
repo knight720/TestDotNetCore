@@ -1,0 +1,17 @@
+﻿@page
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    CultureInfo.CurrentCulture: @CultureInfo.CurrentCulture
+    <br />
+    CultureInfo.CurrentUICulture: @CultureInfo.CurrentUICulture
+    <br />
+    RequestCulture.Culture: @Model.RequestCulture.RequestCulture.Culture
+    <br />
+    RequestCulture.UICulture: @Model.RequestCulture.RequestCulture.UICulture
+</div>
