@@ -10,6 +10,7 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -41,5 +42,12 @@ namespace WebApplication1.Controllers
         public void Delete(int id)
         {
         }
+
+        public ActionResult<int> GetData()
+        {
+            return 0;
+        }
+
+        
     }
 }
