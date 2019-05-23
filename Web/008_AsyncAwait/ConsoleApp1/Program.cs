@@ -13,6 +13,10 @@ namespace ConsoleApp1
 
             Console.ReadLine();
         }
+
+        private void SendRequest(string url)
+        {
+        }
     }
 
     public class Md5VsSha256
