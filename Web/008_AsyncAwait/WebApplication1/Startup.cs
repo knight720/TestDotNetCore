@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebApplication1.Middlewares;
 
 namespace WebApplication1
 {
@@ -34,6 +35,8 @@ namespace WebApplication1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseBenchmarkMiddleware();
 
             app.UseMvc();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,6 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -43,11 +43,15 @@ namespace WebApplication1.Controllers
         {
         }
 
+        [HttpGet]
+        [Route("[action]")]
         public ActionResult<int> GetData()
         {
-            return 0;
-        }
+            var fileInfo = new FileInfo("data.txt");
+            var streamReader = fileInfo.OpenText();
+            var content = streamReader.ReadToEnd();
 
-        
+            return content.Length;
+        }
     }
 }
