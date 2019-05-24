@@ -1,21 +1,33 @@
 ﻿using System;
+using System.Net.Http;
 using System.Security.Cryptography;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleApp1
 {
-    internal class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Md5VsSha256>();
+            //var summary = BenchmarkRunner.Run<Md5VsSha256>();
+
+            var summary = BenchmarkRunner.Run<Program>();
 
             Console.ReadLine();
         }
 
-        private void SendRequest(string url)
+        [Benchmark]
+        public void SendRequest()
         {
+            var url = "http://localhost:5000/api/values/getdata";
+
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+
+            var httpClient = new HttpClient();
+
+            var response = httpClient.SendAsync(httpRequestMessage);
         }
     }
 

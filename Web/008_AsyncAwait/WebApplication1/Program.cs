@@ -28,13 +28,13 @@ namespace WebApplication1
 
         private static void CreateData()
         {
-            var row = 1000;
-            var column = 1000;
+            var row = 10000;
+            var column = 10000;
             var fileName = "data.txt";
             if (File.Exists(fileName) == false)
             {
                 var sw = File.CreateText(fileName);
-                for(int i = 0; i < row; i++)
+                for (int i = 0; i < row; i++)
                 {
                     sw.WriteLine(Program.CreateText(column));
                 }
@@ -48,7 +48,7 @@ namespace WebApplication1
             var length = source.Length;
 
             var sb = new StringBuilder();
-            for(int i = 0; i < column; i++)
+            for (int i = 0; i < column; i++)
             {
                 var index = Program._random.Next(length);
                 sb.Append(source[index]);
