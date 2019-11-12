@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using FluentAssertions;
@@ -23,5 +22,76 @@ namespace _001_Collection
             collection.Should().BeEquivalentTo(8, 2, 1, 5);
             collection.Should().NotBeEquivalentTo(new[] { 8, 2, 3, 5 });
         }
+
+        [Fact]
+        public void Test2()
+        {
+            IEnumerable collection = new[]
+            {
+                new Entity()
+                {
+                    Value = "A"
+                }
+            };
+
+            collection.Should().BeEquivalentTo(new List<Entity> { new Entity() { Value = "A" } });
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            IEnumerable collection = new[]
+            {
+                new Entity()
+                {
+                    Value = "A"
+                }
+            };
+
+            collection.Should().NotBeEquivalentTo(new List<Entity> { new Entity() { Value = "B" } });
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            IList<IEntity> collection = new[]
+            {
+                new EntityB()
+                {
+                    ValueB = "A"
+                }
+            };
+            collection.Should().BeEquivalentTo(new List<IEntity> { new EntityB() { ValueB = "A" } });
+        }
+
+        [Fact]
+        public void Test5()
+        {
+            IList<IEntity> collection = new[]
+            {
+                new EntityB()
+                {
+                    ValueB = "A"
+                }
+            };
+
+            collection.Should().NotBeEquivalentTo(new List<IEntity> { new EntityB() { ValueB = "B" } });
+        }
+    }
+
+    public class Entity
+    {
+        public string Value { get; set; }
+    }
+
+    public interface IEntity
+    {
+        string ValueI { get; set; }
+    }
+
+    public class EntityB : IEntity
+    {
+        public string ValueB { get; set; }
+        public string ValueI { get; set; }
     }
 }
