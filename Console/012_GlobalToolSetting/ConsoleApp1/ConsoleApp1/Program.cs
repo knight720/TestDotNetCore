@@ -1,12 +1,20 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ConsoleApp1
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+                .AddEnvironmentVariables("KNIGHT_")
+                .Build();
+
+            var firstKey = config["FIRSTKEY"];
+
             Console.WriteLine($"Hello World! {DateTime.Now.ToShortTimeString()}");
+            Console.WriteLine($"First: {firstKey}");
         }
     }
 }
