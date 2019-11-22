@@ -20,4 +20,4 @@ $Env:KNIGHT_FIRSTKEY = "No.1"
 Remove-Item Env:KNIGHT_FIRSTKEY
 ```
 > [Powershell](https://hackmd.io/k6L9RJcZTOKKiLNMl91Fnw)  
-> [MSDN](https://docs.microsoft.com/zh-tw/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0#command-line-configuration-provider)
+> [Configuration in ASP.NET Core](https://docs.microsoft.com/zh-tw/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0#command-line-configuration-provider)
