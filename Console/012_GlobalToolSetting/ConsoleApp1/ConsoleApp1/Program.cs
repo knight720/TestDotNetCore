@@ -9,6 +9,7 @@ namespace ConsoleApp1
         {
             var config = new ConfigurationBuilder()
                 .AddEnvironmentVariables("KNIGHT_")
+                .AddCommandLine(args)
                 .Build();
 
             var firstKey = config["FIRSTKEY"];
