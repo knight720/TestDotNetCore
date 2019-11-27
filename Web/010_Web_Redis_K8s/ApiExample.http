@@ -1,0 +1,7 @@
+
+### Get Value
+GET https://localhost:44321/api/Data
+
+@name = 129
+### Set Value
+POST https://localhost:44321/api/Data?name={{name}}
