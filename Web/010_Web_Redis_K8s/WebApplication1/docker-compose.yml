@@ -1,0 +1,8 @@
+﻿version: '2.1'
+services:
+  ap_web:
+    image: knight/web_redis 
+    ports:
+      - "8080:80"
+  db_redis:
+    image: redis
