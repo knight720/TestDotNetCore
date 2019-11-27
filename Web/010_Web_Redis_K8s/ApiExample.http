@@ -1,7 +1,9 @@
+#@host=localhost:44321
+@host=localhost:8080
 
 ### Get Value
-GET https://localhost:44321/api/Data
+GET http://{{host}}/api/Data
 
 @name = 129
 ### Set Value
-POST https://localhost:44321/api/Data?name={{name}}
+POST http://{{host}}/api/Data?name={{name}}
