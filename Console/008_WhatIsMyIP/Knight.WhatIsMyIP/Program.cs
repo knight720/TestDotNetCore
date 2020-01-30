@@ -37,6 +37,7 @@ namespace Knight.WhatIsMyIP
 
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json.user")
                 .Build();
 
             var notifyService = new NotifyService(config, httpClientFactory);
