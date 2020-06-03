@@ -24,7 +24,7 @@ namespace EFCoreHooksConsole.Data
         {
             modelBuilder.Entity<ShopDefault>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.ShopDefault_Id);
 
                 entity.Property(e => e.ShopDefault_CreatedDateTime).HasColumnType("datetime");
 
