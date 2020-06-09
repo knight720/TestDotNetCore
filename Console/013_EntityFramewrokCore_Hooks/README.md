@@ -37,3 +37,9 @@ dotnet tool install --global dotnet-ef
 ```
 dotnet ef dbcontext scaffold "Data Source=(localdb);Initial Catalog=EFHookDB;User ID=sa;Password=P@ssw0rd;" Microsoft.EntityFrameworkCore.SqlServer
 ```
+
+- EF Core Power Tools
+https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools
+
+- EFCoreHooks
+https://github.com/scottbot95/EFCoreHooks
