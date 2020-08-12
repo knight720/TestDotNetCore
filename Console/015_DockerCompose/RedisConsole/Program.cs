@@ -10,11 +10,11 @@ namespace RedisConsole
         private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine(Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT"));
+            Console.WriteLine($"Environment: {Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT")}");
 
             var appSettings = ReadFromAppSettings().Get<AppSettingsModel>();
 
-            Console.WriteLine(appSettings.redis_connect);
+            Console.WriteLine($"Redis Conntect: {appSettings.redis_connect}");
 
             AccessRedis(appSettings);
 

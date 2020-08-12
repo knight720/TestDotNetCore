@@ -13,5 +13,6 @@ RUN dotnet publish -c release -o /app
 # final stage/image
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app
+ENV NETCORE_ENVIRONMENT release
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "RedisConsole.dll"]
