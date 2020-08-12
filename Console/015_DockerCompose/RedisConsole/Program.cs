@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
 namespace RedisConsole
@@ -8,15 +10,29 @@ namespace RedisConsole
         private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine(Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT"));
 
-            AccessRedis();
+            var appSettings = ReadFromAppSettings().Get<AppSettingsModel>();
+
+            Console.WriteLine(appSettings.redis_connect);
+
+            AccessRedis(appSettings);
 
             Console.WriteLine("Finish!!!");
         }
 
-        private static void AccessRedis()
+        public static IConfigurationRoot ReadFromAppSettings()
         {
-            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("redis");
+            return new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false)
+                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT")}.json", true)
+                .Build();
+        }
+
+        private static void AccessRedis(AppSettingsModel appSettings)
+        {
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(appSettings.redis_connect);
             IDatabase db = redis.GetDatabase();
             db.StringSet("KeyDateTime", DateTime.Now.ToLongTimeString());
 
