@@ -1,14 +1,16 @@
 ﻿version: '3'
 services:
   ap_web:
-    image: knight/web_redis
+    build: ./WebApplication1
     ports:
-      - '8080:80'
+      - '5000:80'
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Prod
       - Redis_Host=redis_server
     depends_on:
       - db_redis
   db_redis:
     image: redis
     container_name: redis_server
+    ports:
+      - '6379:6379'

@@ -1,9 +1,8 @@
-@host=localhost:5000
-#@host=localhost:8080
+@host=http://localhost:5000
 
 ### Get Value
-GET http://{{host}}/api/Data
+GET {{host}}/api/Data
 
-@name = 129
+@name = 20200813a
 ### Set Value
-POST http://{{host}}/api/Data?name={{name}}
+POST {{host}}/api/Data?name={{name}}
