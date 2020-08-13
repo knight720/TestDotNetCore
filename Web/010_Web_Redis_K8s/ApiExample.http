@@ -1,5 +1,5 @@
-#@host=localhost:44321
-@host=localhost:8080
+@host=localhost:5000
+#@host=localhost:8080
 
 ### Get Value
 GET http://{{host}}/api/Data
