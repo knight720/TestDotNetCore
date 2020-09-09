@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["TagSystem/TagSystem.csproj", "TagSystem/"]
-RUN dotnet restore "TagSystem/TagSystem.csproj"
+COPY ["TagSystem.csproj", ""]
+RUN dotnet restore "./TagSystem.csproj"
 COPY . .
-WORKDIR "/src/TagSystem"
+WORKDIR "/src/."
 RUN dotnet build "TagSystem.csproj" -c Release -o /app/build
 
 FROM build AS publish
