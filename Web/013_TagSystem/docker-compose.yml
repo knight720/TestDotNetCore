@@ -1,8 +1,13 @@
 version: '3.7'
 services:
- tag-system:
-   build: ./TagSystem
-   container_name: tag-system
+  tag-system:
+   container_name: tag-system_dev
+   image: tag-system:dev
+   build:
+     context: .
+     dockerfile: ./Development.Dockerfile
+   volumes:
+     - .:/app
    ports:
     - "8080:80"
    depends_on:
@@ -13,7 +18,7 @@ services:
     - AWS_ACCESS_KEY_ID='DUMMYIDEXAMPLE'
     - AWS_SECRET_ACCESS_KEY='DUMMYEXAMPLEKEY'
     - REGION='eu-west-1'
- dynamodb-local:
+  dynamodb-local:
    image: amazon/dynamodb-local:latest
    container_name: dynamodb-local
    ports:

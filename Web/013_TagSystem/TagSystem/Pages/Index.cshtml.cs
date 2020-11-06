@@ -19,7 +19,7 @@ namespace TagSystem.Pages
 
         public void OnGet()
         {
-
+            Console.WriteLine("OnGet");
         }
     }
 }
