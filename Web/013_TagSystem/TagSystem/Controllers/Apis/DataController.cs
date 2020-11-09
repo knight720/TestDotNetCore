@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TagSystem.Services;
 
@@ -8,11 +9,11 @@ namespace TagSystem.Controllers.Apis
     [ApiController]
     public class DataController : ControllerBase
     {
-        private readonly DynamoDBService _dyanmoDBService;
+        private readonly IDynamoDBServcie _dynamoDBServcie;
 
-        public DataController()
+        public DataController(IDynamoDBServcie dynamoDBServcie)
         {
-            this._dyanmoDBService = new DynamoDBService();
+            this._dynamoDBServcie = dynamoDBServcie;
         }
 
         /// <summary>
@@ -22,11 +23,12 @@ namespace TagSystem.Controllers.Apis
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            var client = this._dyanmoDBService.GetClient();
+            var client = this._dynamoDBServcie.GetClient();
+            this._dynamoDBServcie.CreateTable(DateTime.Now.ToString("HHmmss"));
             var response = await client.ListTablesAsync();
             var isContain = response.TableNames.Contains("ABC");
 
-            return Ok(isContain);
+            return Ok(string.Join(',', response.TableNames));
         }
     }
 }
