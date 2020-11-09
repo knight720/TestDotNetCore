@@ -14,6 +14,11 @@ aws configure
 # Default output format [None]: json
 ```
 
+# CLI憑據文件 
+```
+C:\Users\[USERNAME]\.aws\credentials
+```
+
 # 使用 AWS CLI 連線至 DynamoDB
 ```
 aws dynamodb list-tables --endpoint-url http://localhost:8000
