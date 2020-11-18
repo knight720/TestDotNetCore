@@ -4,6 +4,8 @@
 ```
 # 啟動 DynamoDB
 docker run --rm -it -d -p 8000:8000 amazon/dynamodb-local
+# 跨 Application 共享 DB
+docker run --rm -it -d -p 8000:8000 amazon/dynamodb-local java -jar DynamoDBLocal.jar  -sharedDb -inMemory
 ```
 
 # 設定 AWS
@@ -31,3 +33,10 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 > [Create a DynamoDB Client](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.NET.01.html)  
 > [Getting Started with .NET and DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.NET.html)  
 > [Best Practices for Designing and Architecting with DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html)  
+> [Amazon DynamoDB 文件](https://docs.aws.amazon.com/dynamodb/index.html)  
+> [Study Notes - DynamoDB 學習筆記](https://rickhw.github.io/2016/08/17/AWS/Study-Notes-DynamoDB/)  
+> [Amazon DynamoDB 筆記](https://blog.gslin.org/archives/2015/01/14/5534/amazon-dynamodb-%E7%AD%86%E8%A8%98/)  
+
+#### Local DynamoDB
+- -sharedDb
+> [DynamoDB Local Usage Notes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html)
