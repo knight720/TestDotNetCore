@@ -5,9 +5,8 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using TagSystem.Services.DynamoDBs;
 
-namespace TagSystem.Services
+namespace TagSystem.Services.DynamoDBs
 {
     public class DynamoDBService : IDynamoDBServcie
     {
@@ -21,11 +20,11 @@ namespace TagSystem.Services
         {
             if (_client == null)
             {
-                if (this._options.UseDynamoDbLocal)
+                if (_options.UseDynamoDbLocal)
                 {
                     var config = new AmazonDynamoDBConfig()
                     {
-                        ServiceURL = this._options.ServiceUrl,
+                        ServiceURL = _options.ServiceUrl,
                     };
                     _client = new AmazonDynamoDBClient(config);
                 }
@@ -39,11 +38,11 @@ namespace TagSystem.Services
 
         public DynamoDBService(IConfiguration configuration, ILogger<DynamoDBService> logger)
         {
-            this._configuration = configuration;
-            this._logger = logger;
+            _configuration = configuration;
+            _logger = logger;
 
-            this._options = new DynamoDBOptions();
-            this._configuration.GetSection(DynamoDBOptions.DynamoDB).Bind(this._options);
+            _options = new DynamoDBOptions();
+            _configuration.GetSection(DynamoDBOptions.DynamoDB).Bind(_options);
         }
 
         /// <summary>
@@ -82,11 +81,11 @@ namespace TagSystem.Services
 
             try
             {
-                this.GetClient().CreateTableAsync(request);
+                GetClient().CreateTableAsync(request);
             }
             catch (Exception ex)
             {
-                this._logger.LogError(default(EventId), ex, "");
+                _logger.LogError(default, ex, "");
                 response = false;
             }
 
@@ -95,7 +94,7 @@ namespace TagSystem.Services
 
         public async Task<bool> TableExist(string tableName)
         {
-            var response = await this.GetClient().ListTablesAsync();
+            var response = await GetClient().ListTablesAsync();
             return response.TableNames.Contains(tableName);
         }
     }

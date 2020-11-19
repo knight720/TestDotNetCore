@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TagSystem.Services;
+using TagSystem.Services.DynamoDBs;
 
 namespace TagSystem.Controllers.Apis
 {

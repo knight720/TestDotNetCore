@@ -1,6 +1,7 @@
-﻿using Amazon.DynamoDBv2;
+﻿using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
 
-namespace TagSystem.Services
+namespace TagSystem.Services.DynamoDBs
 {
     public interface IDynamoDBServcie
     {
