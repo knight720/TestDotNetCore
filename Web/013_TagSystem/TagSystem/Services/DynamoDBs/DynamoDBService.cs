@@ -94,8 +94,20 @@ namespace TagSystem.Services.DynamoDBs
 
         public async Task<bool> TableExist(string tableName)
         {
+            var response = await this.TableList();
+            return response.Contains(tableName);
+        }
+
+        public async Task<QueryResponse> Query(string filter)
+        {
+            QueryRequest query = new QueryRequest();
+            return await GetClient().QueryAsync(query);
+        }
+
+        public async Task<List<string>> TableList()
+        {
             var response = await GetClient().ListTablesAsync();
-            return response.TableNames.Contains(tableName);
+            return response.TableNames;
         }
     }
 }

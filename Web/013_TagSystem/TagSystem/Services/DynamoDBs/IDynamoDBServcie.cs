@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 
 namespace TagSystem.Services.DynamoDBs
 {
@@ -7,8 +9,12 @@ namespace TagSystem.Services.DynamoDBs
     {
         bool CreateTable(string tableName);
 
+        Task<List<string>> TableList();
+
         AmazonDynamoDBClient GetClient();
 
         Task<bool> TableExist(string tableName);
+
+        Task<QueryResponse> Query(string filter);
     }
 }

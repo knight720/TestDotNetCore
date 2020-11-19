@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TagSystem.Services.DynamoDBs;
 
@@ -23,12 +22,7 @@ namespace TagSystem.Controllers.Apis
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            var client = this._dynamoDBServcie.GetClient();
-            this._dynamoDBServcie.CreateTable(DateTime.Now.ToString("HHmmss"));
-            var response = await client.ListTablesAsync();
-            var isContain = response.TableNames.Contains("ABC");
-
-            return Ok(string.Join(',', response.TableNames));
+            return Ok(string.Join(',', await this._dynamoDBServcie.TableList()));
         }
 
         [HttpGet("{tableName}")]
