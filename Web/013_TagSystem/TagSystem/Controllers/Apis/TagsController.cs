@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using TagSystem.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +10,13 @@ namespace TagSystem.Controllers.Apis
     [ApiController]
     public class TagsController : ControllerBase
     {
+        private readonly ITagsService _tagsService;
+
+        public TagsController(ITagsService tagsService)
+        {
+            this._tagsService = tagsService;
+        }
+
         // GET: api/<TagsController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -21,8 +26,9 @@ namespace TagSystem.Controllers.Apis
 
         // GET api/<TagsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
+            this._tagsService.GetTag(id);
             return "value";
         }
 

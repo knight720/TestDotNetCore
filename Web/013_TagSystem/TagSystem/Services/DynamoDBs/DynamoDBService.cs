@@ -98,9 +98,8 @@ namespace TagSystem.Services.DynamoDBs
             return response.Contains(tableName);
         }
 
-        public async Task<QueryResponse> Query(string filter)
+        public async Task<QueryResponse> Query(QueryRequest query)
         {
-            QueryRequest query = new QueryRequest();
             return await GetClient().QueryAsync(query);
         }
 

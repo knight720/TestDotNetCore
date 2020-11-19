@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TagSystem.Services;
 using TagSystem.Services.DynamoDBs;
 
 namespace TagSystem
@@ -21,6 +22,7 @@ namespace TagSystem
         {
             services.AddRazorPages();
             services.AddScoped<IDynamoDBServcie, DynamoDBService>();
+            services.AddScoped<ITagsService, TagsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
