@@ -70,7 +70,7 @@ namespace TagSystem.Services.DynamoDBs
                     {
                         AttributeName = "Id",
                         KeyType = "HASH"  //Partition key
-				    }
+                    }
                 },
                 ProvisionedThroughput = new ProvisionedThroughput
                 {
