@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Configuration;
@@ -90,6 +91,12 @@ namespace TagSystem.Services
             }
 
             return response;
+        }
+
+        public async Task<bool> TableExist(string tableName)
+        {
+            var response = await this.GetClient().ListTablesAsync();
+            return response.TableNames.Contains(tableName);
         }
     }
 }

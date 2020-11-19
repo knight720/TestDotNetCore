@@ -42,3 +42,6 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 #### Local DynamoDB
 - -sharedDb
 > [DynamoDB Local Usage Notes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html)
+
+#### GUI Tool
+> [Download NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.settingup.html)

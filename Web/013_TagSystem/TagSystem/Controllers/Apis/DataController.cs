@@ -30,5 +30,11 @@ namespace TagSystem.Controllers.Apis
 
             return Ok(string.Join(',', response.TableNames));
         }
+
+        [HttpGet("{tableName}")]
+        public async Task<ActionResult> TableExist(string tableName)
+        {
+            return Ok(await this._dynamoDBServcie.TableExist(tableName));
+        }
     }
 }

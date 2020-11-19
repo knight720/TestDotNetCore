@@ -7,5 +7,7 @@ namespace TagSystem.Services
         bool CreateTable(string tableName);
 
         AmazonDynamoDBClient GetClient();
+
+        Task<bool> TableExist(string tableName);
     }
 }
