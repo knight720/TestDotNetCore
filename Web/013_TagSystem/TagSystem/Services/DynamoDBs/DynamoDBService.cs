@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -98,7 +99,12 @@ namespace TagSystem.Services.DynamoDBs
             return response.Contains(tableName);
         }
 
-        public async Task<QueryResponse> Query(QueryRequest query)
+        public Table GetTable(string tableName)
+        {
+            return Table.LoadTable(GetClient(), tableName);
+        }
+
+        public async Task<QueryResponse> Query(string tableName, QueryRequest query)
         {
             return await GetClient().QueryAsync(query);
         }

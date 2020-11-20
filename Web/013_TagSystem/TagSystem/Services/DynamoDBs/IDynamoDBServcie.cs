@@ -15,6 +15,8 @@ namespace TagSystem.Services.DynamoDBs
 
         Task<bool> TableExist(string tableName);
 
-        Task<QueryResponse> Query(QueryRequest query);
+        Table GetTable(string tableName);
+
+        Task<QueryResponse> Query(string tableName, QueryRequest query);
     }
 }

@@ -2,3 +2,7 @@
 
 ###
 GET {{host}}/api/data
+
+###
+@tagName = abc
+GET {{host}}/api/tags/{{tagName}}
