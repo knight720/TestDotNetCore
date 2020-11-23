@@ -1,8 +1,13 @@
 @host = http://localhost:5000
 
-###
+### Get Table List
 GET {{host}}/api/data
 
-###
+### Create Table
+@tableName = T003
+POST {{host}}/api/data/{{tableName}}
+
+
+### Get Tag by TagName
 @tagName = abc
 GET {{host}}/api/tags/{{tagName}}

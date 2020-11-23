@@ -30,5 +30,12 @@ namespace TagSystem.Controllers.Apis
         {
             return Ok(await this._dynamoDBServcie.TableExist(tableName));
         }
+
+        // POST api/<TagsController>
+        [HttpPost("{tableName}")]
+        public void Post(string tableName)
+        {
+            this._dynamoDBServcie.CreateTable(tableName);
+        }
     }
 }

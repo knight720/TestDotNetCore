@@ -1,9 +1,11 @@
-
+# 啟動
+```
+docker-compose -f dynamodb.yaml up
+```
 
 # DynamoDB
 ```
 # 啟動 DynamoDB
-docker run --rm -it -d -p 8000:8000 amazon/dynamodb-local
 # 跨 Application 共享 DB
 docker run --rm -it -d -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar  -sharedDb -inMemory
 ```
