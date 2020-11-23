@@ -28,8 +28,8 @@ namespace TagSystem.Controllers.Apis
         [HttpGet("{id}")]
         public string Get(string id)
         {
-            this._tagsService.GetTag(id);
-            return "value";
+            var result = this._tagsService.GetTag(id);
+            return result;
         }
 
         // POST api/<TagsController>

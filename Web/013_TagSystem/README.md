@@ -39,6 +39,10 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 > [Amazon DynamoDB 筆記](https://blog.gslin.org/archives/2015/01/14/5534/amazon-dynamodb-%E7%AD%86%E8%A8%98/)  
 
 #### Develop
+
+In the document model, the primary classes are Table and Document. The Table class provides data operation methods such as PutItem, GetItem, and DeleteItem. It also provides the Query and the Scan methods. The Document class represents a single item in a table.
+
+> [.NET: Document Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKMidLevel.html)
 > [Getting Started with .NET and DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.NET.html)  
 
 #### Local DynamoDB
@@ -47,3 +51,6 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 
 #### GUI Tool
 > [Download NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.settingup.html)
+
+#### 效能提升到最高且輸送量成本降到最低的建議
+> [使用 DynamoDB 進行設計和建構的最佳實務](https://docs.aws.amazon.com/zh_tw/amazondynamodb/latest/developerguide/best-practices.html)

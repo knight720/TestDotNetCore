@@ -1,6 +1,5 @@
-﻿using System.Threading;
+﻿using System.Text.Json;
 using Amazon.DynamoDBv2.DocumentModel;
-using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Logging;
 using TagSystem.Services.DynamoDBs;
 
@@ -17,23 +16,21 @@ namespace TagSystem.Services
             this._logger = logger;
         }
 
-        public bool GetTag(string tagId)
+        public string GetTag(string tagId)
         {
-            var query = new QueryRequest()
-            {
-            };
-            //this._dynamoDBService.Query(query);
-
-            var hash = new Primitive()
-            {
-            };
-
-            var token = new CancellationToken();
-
             var table = this.GetTable();
             this._logger.LogInformation($"ItemCount: {table.Attributes.Count}");
-            table.GetItemAsync(hash, token);
 
+            var document = table.GetItemAsync(new Primitive("TAG#1c9f54c59df9"), new Primitive("44#1699343119")).Result;
+
+            return JsonSerializer.Serialize(document);
+        }
+
+        public bool SetTag()
+        {
+            var doc = new Document();
+            var table = this.GetTable();
+            table.PutItemAsync(doc);
             return true;
         }
 

@@ -2,6 +2,6 @@
 {
     public interface ITagsService
     {
-        bool GetTag(string tagId);
+        string GetTag(string tagId);
     }
 }

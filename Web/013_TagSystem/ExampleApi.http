@@ -9,5 +9,5 @@ POST {{host}}/api/data/{{tableName}}
 
 
 ### Get Tag by TagName
-@tagName = abc
-GET {{host}}/api/tags/{{tagName}}
+@tagId = 1c9f54c59df9
+GET {{host}}/api/tags/{{tagId}}
