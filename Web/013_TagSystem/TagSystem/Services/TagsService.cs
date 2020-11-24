@@ -1,6 +1,11 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading;
 using Amazon.DynamoDBv2.DocumentModel;
+using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Logging;
+using TagSystem.Models.Tags;
 using TagSystem.Services.DynamoDBs;
 
 namespace TagSystem.Services
@@ -16,6 +21,11 @@ namespace TagSystem.Services
             this._logger = logger;
         }
 
+        public void Create(TagEntity tag)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public string GetTag(string tagId)
         {
             var table = this.GetTable();
@@ -24,6 +34,29 @@ namespace TagSystem.Services
             var document = table.GetItemAsync(new Primitive("TAG#1c9f54c59df9"), new Primitive("44#1699343119")).Result;
 
             return JsonSerializer.Serialize(document);
+        }
+
+        public IEnumerable<TagEntity> Query(TagQueryEntity queryEntity)
+        {
+            QueryRequest qRequest = new QueryRequest
+            {
+                TableName = "Tags",
+                ExpressionAttributeNames = new Dictionary<string, string>
+                {
+                    { "#pk", "PK" }
+                },
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+                {
+                    { ":qPk",   new AttributeValue { S = queryEntity.PK} },
+                },
+                KeyConditionExpression = "#pk = :qPk",
+            };
+
+            var response = this._dynamoDBService.GetClient().QueryAsync(qRequest, default(CancellationToken)).Result;
+
+            var result = response.Items.Select(i => new TagEntity(i)).ToList();
+
+            return result;
         }
 
         public bool SetTag()

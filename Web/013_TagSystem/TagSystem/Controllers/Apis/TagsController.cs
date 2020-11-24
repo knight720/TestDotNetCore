@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using TagSystem.Models.Tags;
 using TagSystem.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -34,8 +35,9 @@ namespace TagSystem.Controllers.Apis
 
         // POST api/<TagsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] TagEntity tag)
         {
+            this._tagsService.Create(tag);
         }
 
         // PUT api/<TagsController>/5
@@ -48,6 +50,13 @@ namespace TagSystem.Controllers.Apis
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPost("Query")]
+        public ActionResult<IEnumerable<TagEntity>> Query([FromBody] TagQueryEntity queryEntity)
+        {
+            var result = this._tagsService.Query(queryEntity);
+            return new ActionResult<IEnumerable<TagEntity>>(result);
         }
     }
 }
