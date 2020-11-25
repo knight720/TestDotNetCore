@@ -12,6 +12,7 @@ namespace TagSystem.Services
 {
     public class TagsService : ITagsService
     {
+        private const string TABLENAME = "Tags";
         private readonly IDynamoDBServcie _dynamoDBService;
         private readonly ILogger<TagsService> _logger;
 
@@ -23,7 +24,12 @@ namespace TagSystem.Services
 
         public void Create(TagEntity tag)
         {
-            throw new System.NotImplementedException();
+            var request = new PutItemRequest
+            {
+                TableName = TABLENAME,
+                Item = tag.ToItem(),
+            };
+            var response = this._dynamoDBService.GetClient().PutItemAsync(request).Result;
         }
 
         public string GetTag(string tagId)
@@ -40,7 +46,7 @@ namespace TagSystem.Services
         {
             QueryRequest qRequest = new QueryRequest
             {
-                TableName = "Tags",
+                TableName = TABLENAME,
                 ExpressionAttributeNames = new Dictionary<string, string>
                 {
                     { "#pk", "PK" }
@@ -69,7 +75,7 @@ namespace TagSystem.Services
 
         private Table GetTable()
         {
-            return this._dynamoDBService.GetTable("Tags");
+            return this._dynamoDBService.GetTable(TABLENAME);
         }
     }
 }

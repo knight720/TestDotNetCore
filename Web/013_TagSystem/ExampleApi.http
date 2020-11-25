@@ -11,3 +11,33 @@ POST {{host}}/api/data/{{tableName}}
 ### Get Tag by TagName
 @tagId = 1c9f54c59df9
 GET {{host}}/api/tags/{{tagId}}
+
+### Create Tag
+
+POST {{host}}/api/tags
+Content-Type: application/json
+
+{
+    
+}
+
+### Query Tag
+POST {{host}}/api/tags/query
+Content-Type: application/json
+
+{
+    "PK": "TAG#1c9f54c59df9"
+}
+
+### Create Tag
+POST {{host}}/api/tags
+Content-Type: application/json
+
+{
+  "pk": "TAG#111",
+  "sk": "44#222",
+  "sale_page_id": "123",
+  "multipal_language_content": "{ \"en-US\":\"Size_M\"}",
+  "tag_name": "尺寸_A",
+  "shop_id": "44"
+}
