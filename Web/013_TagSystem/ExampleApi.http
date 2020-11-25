@@ -12,6 +12,11 @@ POST {{host}}/api/data/{{tableName}}
 @tagId = 1c9f54c59df9
 GET {{host}}/api/tags/{{tagId}}
 
+### Get Tag by TagName. # = %23
+@shopId = 44
+@tagId = TAG%231c9f54c59df9
+GET {{host}}/api/tags/{{shopId}}/{{tagId}}
+
 ### Create Tag
 
 POST {{host}}/api/tags

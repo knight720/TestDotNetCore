@@ -33,6 +33,14 @@ namespace TagSystem.Controllers.Apis
             return result;
         }
 
+        // GET api/<TagsController>/5/1
+        [HttpGet("{shopId}/{id}")]
+        public ActionResult<IEnumerable<TagEntity>> Get(string shopId, string id)
+        {
+            var result = this._tagsService.GetTag(shopId, id);
+            return this.Ok(result);
+        }
+
         // POST api/<TagsController>
         [HttpPost]
         public void Post([FromBody] TagEntity tag)

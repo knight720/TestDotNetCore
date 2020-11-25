@@ -42,6 +42,33 @@ namespace TagSystem.Services
             return JsonSerializer.Serialize(document);
         }
 
+        public IEnumerable<TagEntity> GetTag(string shopId, string id)
+        {
+            var values = new Dictionary<string, AttributeValue>
+            {
+                { ":qShopId", new AttributeValue { S = shopId } },
+            };
+            var expression = "ShopId = :qShopId";
+
+            if (string.IsNullOrEmpty(id) == false)
+            {
+                values.Add(":qPk", new AttributeValue { S = id });
+                expression = $"{expression} AND PK = :qPk";
+            }
+
+            QueryRequest qRequest = new QueryRequest
+            {
+                TableName = TABLENAME,
+                IndexName = "ByShop",
+                ExpressionAttributeValues = values,
+                KeyConditionExpression = expression,
+            };
+
+            var response = this._dynamoDBService.GetClient().QueryAsync(qRequest, default(CancellationToken)).Result;
+
+            return response.Items.Select(i => new TagEntity(i)).ToList();
+        }
+
         public IEnumerable<TagEntity> Query(TagQueryEntity queryEntity)
         {
             QueryRequest qRequest = new QueryRequest
@@ -53,7 +80,7 @@ namespace TagSystem.Services
                 },
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>
                 {
-                    { ":qPk",   new AttributeValue { S = queryEntity.PK} },
+                    { ":qPk", new AttributeValue { S = queryEntity.PK } },
                 },
                 KeyConditionExpression = "#pk = :qPk",
             };
