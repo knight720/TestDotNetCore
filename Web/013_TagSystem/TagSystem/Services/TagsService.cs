@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
@@ -30,7 +29,8 @@ namespace TagSystem.Services
                 TableName = TABLENAME,
                 Item = tag.ToItem(),
             };
-            var response = GetClient().PutItemAsync(request).Result;
+
+            var response = this._dynamoDBService.PutItemAsync(request).Result;
         }
 
         public string GetTag(string tagId)
@@ -65,7 +65,7 @@ namespace TagSystem.Services
                 KeyConditionExpression = expression,
             };
 
-            var response = GetClient().QueryAsync(qRequest, default(CancellationToken)).Result;
+            var response = this._dynamoDBService.QueryAsync(qRequest).Result;
 
             return response.Items.Select(i => new TagEntity(i)).ToList();
         }
@@ -86,11 +86,9 @@ namespace TagSystem.Services
                 KeyConditionExpression = "#pk = :qPk",
             };
 
-            var response = GetClient().QueryAsync(qRequest, default(CancellationToken)).Result;
+            var response = this._dynamoDBService.QueryAsync(qRequest).Result;
 
-            var result = response.Items.Select(i => new TagEntity(i)).ToList();
-
-            return result;
+            return response.Items.Select(i => new TagEntity(i)).ToList();
         }
 
         private AmazonDynamoDBClient GetClient()

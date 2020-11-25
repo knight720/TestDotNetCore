@@ -114,5 +114,15 @@ namespace TagSystem.Services.DynamoDBs
             var response = await GetClient().ListTablesAsync();
             return response.TableNames;
         }
+
+        public async Task<PutItemResponse> PutItemAsync(PutItemRequest request)
+        {
+            return await this.GetClient().PutItemAsync(request);
+        }
+
+        public async Task<QueryResponse> QueryAsync(QueryRequest qRequest)
+        {
+            return await GetClient().QueryAsync(qRequest, default);
+        }
     }
 }

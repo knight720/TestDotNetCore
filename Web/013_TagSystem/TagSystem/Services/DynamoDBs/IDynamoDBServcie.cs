@@ -19,5 +19,9 @@ namespace TagSystem.Services.DynamoDBs
         Table GetTable(string tableName);
 
         Task<QueryResponse> Query(string tableName, QueryRequest query);
+
+        Task<PutItemResponse> PutItemAsync(PutItemRequest request);
+
+        Task<QueryResponse> QueryAsync(QueryRequest qRequest);
     }
 }
