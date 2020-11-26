@@ -120,6 +120,22 @@ namespace TagSystem.Services.DynamoDBs
             return await this.GetClient().PutItemAsync(request);
         }
 
+        public BatchWriteItemResponse BatchWriteItem(BatchWriteItemRequest request)
+        {
+            BatchWriteItemResponse result;
+            do
+            {
+                // Issue request and retrieve items
+                result = GetClient().BatchWriteItemAsync(request).Result;
+
+                // Some items may not have been processed!
+                //  Set RequestItems to the result's UnprocessedItems and reissue request
+                request.RequestItems = result.UnprocessedItems;
+            } while (result.UnprocessedItems.Count > 0);
+
+            return result;
+        }
+
         public async Task<QueryResponse> QueryAsync(QueryRequest qRequest)
         {
             return await GetClient().QueryAsync(qRequest, default);

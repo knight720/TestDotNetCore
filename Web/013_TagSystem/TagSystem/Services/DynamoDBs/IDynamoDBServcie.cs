@@ -22,6 +22,8 @@ namespace TagSystem.Services.DynamoDBs
 
         Task<PutItemResponse> PutItemAsync(PutItemRequest request);
 
+        BatchWriteItemResponse BatchWriteItem(BatchWriteItemRequest request);
+
         Task<QueryResponse> QueryAsync(QueryRequest qRequest);
     }
 }

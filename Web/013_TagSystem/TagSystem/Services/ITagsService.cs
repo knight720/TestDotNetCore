@@ -12,5 +12,7 @@ namespace TagSystem.Services
         void Create(TagEntity tag);
 
         IEnumerable<TagEntity> GetTag(string shopId, string id);
+
+        void CreateList(IEnumerable<TagEntity> tags);
     }
 }

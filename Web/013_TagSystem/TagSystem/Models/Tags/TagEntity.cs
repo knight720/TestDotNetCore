@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json.Serialization;
 using Amazon.DynamoDBv2.Model;
 
@@ -12,32 +13,12 @@ namespace TagSystem.Models.Tags
 
         public TagEntity(IDictionary<string, AttributeValue> item)
         {
+            var properties = this.GetType().GetProperties();
+
             foreach (var i in item.Keys)
             {
-                if (i == "PK")
-                {
-                    PK = item[i].S;
-                }
-                else if (i == "SK")
-                {
-                    SK = item[i].S;
-                }
-                else if (i == "SalePageId")
-                {
-                    SK = item[i].S;
-                }
-                else if (i == "MultipalLanguageContent")
-                {
-                    MultipalLanguageContent = item[i].S;
-                }
-                else if (i == "TagName")
-                {
-                    TagName = item[i].S;
-                }
-                else if (i == "ShopId")
-                {
-                    ShopId = item[i].S;
-                }
+                var property = properties.FirstOrDefault(p => p.Name == i);
+                property?.SetValue(this, item[i].S);
             }
         }
 
@@ -45,15 +26,15 @@ namespace TagSystem.Models.Tags
         {
             // Define item attributes
             Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
-            // Author is hash-key
-            attributes["PK"] = new AttributeValue { S = PK };
-            // Title is range-key
-            attributes["SK"] = new AttributeValue { S = SK };
-            // Other attributes
-            attributes["SalePageId"] = new AttributeValue { S = SalePageId };
-            attributes["MultipalLanguageContent"] = new AttributeValue { S = MultipalLanguageContent };
-            attributes["TagName"] = new AttributeValue { S = TagName };
-            attributes["ShopId"] = new AttributeValue { S = ShopId };
+
+            foreach (var property in this.GetType().GetProperties())
+            {
+                var value = property.GetValue(this)?.ToString();
+                if (string.IsNullOrEmpty(value) == false)
+                {
+                    attributes[property.Name] = new AttributeValue { S = value };
+                }
+            }
 
             return attributes;
         }
@@ -75,5 +56,8 @@ namespace TagSystem.Models.Tags
 
         [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
+
+        [JsonPropertyName("tag_id")]
+        public string TagId { get; set; }
     }
 }

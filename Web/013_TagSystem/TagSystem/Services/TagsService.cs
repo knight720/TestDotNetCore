@@ -33,6 +33,21 @@ namespace TagSystem.Services
             var response = this._dynamoDBService.PutItemAsync(request).Result;
         }
 
+        public void CreateList(IEnumerable<TagEntity> tags)
+        {
+            // Construct write-request for first table
+            List<WriteRequest> TagItems = new List<WriteRequest>();
+            tags.ToList().ForEach(i => TagItems.Add(new WriteRequest { PutRequest = new PutRequest { Item = i.ToItem() } }));
+
+            // Construct table-keys mapping
+            Dictionary<string, List<WriteRequest>> requestItems = new Dictionary<string, List<WriteRequest>>();
+            requestItems[TABLENAME] = TagItems;
+
+            var request = new BatchWriteItemRequest { RequestItems = requestItems };
+
+            var response = this._dynamoDBService.BatchWriteItem(request);
+        }
+
         public string GetTag(string tagId)
         {
             var table = this.GetTable();

@@ -44,5 +44,31 @@ Content-Type: application/json
   "sale_page_id": "123",
   "multipal_language_content": "{ \"en-US\":\"Size_M\"}",
   "tag_name": "尺寸_A",
-  "shop_id": "44"
+  "shop_id": "44",
+  "tag_id": "333"
 }
+
+### Create Tag List
+POST {{host}}/api/tags/list
+Content-Type: application/json
+
+[
+  {
+    "pk": "TAG#001",
+    "sk": "46#0011",
+    "sale_page_id": "00111",
+    "multipal_language_content": "{ \"en-US\":\"Size_M\"}",
+    "tag_name": "尺寸_A",
+    "shop_id": "46",
+    "tag_id": "001"
+  },
+  {
+    "pk": "TAG#002",
+    "sk": "35#0022",
+    "sale_page_id": "00222",
+    "multipal_language_content": "{ \"en-US\":\"Size_M\"}",
+    "tag_name": "Style_Romance",
+    "shop_id": "35",
+    "tag_id": "002"
+  }
+]

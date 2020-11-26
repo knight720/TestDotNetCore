@@ -48,6 +48,14 @@ namespace TagSystem.Controllers.Apis
             this._tagsService.Create(tag);
         }
 
+        // POST api/<TagsController>/list
+        [HttpPost("List")]
+        public ActionResult PostList([FromBody] IEnumerable<TagEntity> tags)
+        {
+            this._tagsService.CreateList(tags);
+            return this.Ok();
+        }
+
         // PUT api/<TagsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
