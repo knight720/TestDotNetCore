@@ -1,7 +1,14 @@
-# 啟動
+# How To Start
+1. 啟動 Local DynamoDB
 ```
 docker-compose -f dynamodb.yaml up
 ```
+
+2. 操作 NoSQL Workbench 新增 Table
+- Commit to Amazon DynamoDB
+
+3. 開啟 TagSystem Application
+dotnet TagSystem.dll
 
 # DynamoDB
 ```
