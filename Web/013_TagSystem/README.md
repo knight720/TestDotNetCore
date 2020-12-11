@@ -36,6 +36,11 @@ C:\Users\[USERNAME]\.aws\credentials
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
 
+# Build Image
+```
+docker build -t tag-system:dev .
+```
+
 # Reference
 > [Docker image](https://hub.docker.com/r/cnadiminti/dynamodb-local/)  
 > [AWS Command Line Interface 組態基礎概念](https://docs.aws.amazon.com/zh_tw/cli/latest/userguide/cli-configure-quickstart.html)  

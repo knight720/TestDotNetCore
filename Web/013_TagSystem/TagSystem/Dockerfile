@@ -1,6 +1,12 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+RUN apt-get update
+RUN apt-get install awscli --assume-yes
+RUN aws configure set aws_access_key_id ABC
+RUN aws configure set aws_secret_access_key DEF
+RUN aws configure set region ap-northeast-1
+RUN aws configure set output json
 WORKDIR /app
 EXPOSE 80
 
