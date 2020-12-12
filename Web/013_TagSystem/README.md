@@ -1,7 +1,7 @@
 # How To Start
 1. 啟動 Local DynamoDB
 ```
-docker-compose -f dynamodb.yaml up
+docker-compose -f dynamodb.yml up
 ```
 
 2. 操作 NoSQL Workbench 新增 Table
