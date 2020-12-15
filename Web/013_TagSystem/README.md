@@ -1,4 +1,13 @@
+# Evironment
+- Development  
+本機開發，連線至 host dynamodb
+- Staging  
+docker image 測試，連線至 host dynamodb
+- Production  
+docker compose 的整合測試
+
 # How To Start
+## development
 1. 啟動 Local DynamoDB
 ```
 docker-compose -f dynamodb.yml up
@@ -8,16 +17,51 @@ docker-compose -f dynamodb.yml up
 - Commit to Amazon DynamoDB
 
 3. 開啟 TagSystem Application
-dotnet TagSystem.dll
-
-# DynamoDB
 ```
+dotnet TagSystem.dll
+```
+
+## Staging
+1. 啟動 Local DynamoDB
+```
+docker-compose -f dynamodb.yml up
+```
+
+2. 操作 NoSQL Workbench 新增 Table
+- Commit to Amazon DynamoDB
+
+3. Build Image
+```
+docker build -t tag-system .
+```
+
+4. 開啟 TagSystem Application
+```
+docker run --rm -it -p 5000:80 -e AWS_ACCESS_KEY_ID=abc -e AWS_SECRET_ACCESS_KEY=def -e ASPNETCORE_ENVIRONMENT=Staging tag-system
+```
+
+## Production
+1. 啟動 Application
+```
+docker-compose up
+```
+
+2. 操作 NoSQL Workbench 新增 Table
+- Commit to Amazon DynamoDB
+
 # 啟動 DynamoDB
+- by docker
+```
 # 跨 Application 共享 DB
 docker run --rm -it -d -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar  -sharedDb -inMemory
 ```
+- by docker-compose
+```
+docker-compose -f dynamodb.yml up
+```
 
-# 設定 AWS
+# 使用 DynamoDB
+- 設定 AWS
 ```
 aws configure
 # AWS Access Key ID [None]: KeyId
@@ -26,33 +70,15 @@ aws configure
 # Default output format [None]: json
 ```
 
-# CLI 憑據文件 
+- CLI 憑據文件 
 ```
 C:\Users\[USERNAME]\.aws\credentials
 ```
 
-# 使用 AWS CLI 連線至 DynamoDB
+- 使用 AWS CLI 連線至 DynamoDB
 ```
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
-
-# Build Image
-```
-docker build -t tag-system .
-```
-
-# TagSystem
-```
-docker run --rm -it -p 5000:80 -e AWS_ACCESS_KEY_ID=abc -e AWS_SECRET_ACCESS_KEY=def -e ASPNETCORE_ENVIRONMENT=Staging tag-system
-```
-
-# Evironment
-- Development  
-本機開發，連線至 host dynamodb
-- Staging  
-docker image 測試，連線至 host dynamodb
-- Production  
-docker compose 的整合測試
 
 # Reference
 > [Docker image](https://hub.docker.com/r/cnadiminti/dynamodb-local/)  
