@@ -13,10 +13,11 @@ docker compose 的整合測試
 docker-compose -f dynamodb.yml up
 ```
 
-2. 操作 NoSQL Workbench 新增 Table
+2.  新增 Table (optional)
+- 操作 NoSQL Workbench
 - Commit to Amazon DynamoDB
 
-3. 開啟 TagSystem Application
+3. 啟動 TagSystem
 ```
 dotnet TagSystem.dll
 ```
@@ -27,26 +28,33 @@ dotnet TagSystem.dll
 docker-compose -f dynamodb.yml up
 ```
 
-2. 操作 NoSQL Workbench 新增 Table
+2.  新增 Table (optional)
+- 操作 NoSQL Workbench
 - Commit to Amazon DynamoDB
 
-3. Build Image
+3. Build Image (optional)
 ```
 docker build -t tag-system .
 ```
 
-4. 開啟 TagSystem Application
+4. 啟動 TagSystem
 ```
 docker run --rm -it -p 5000:80 -e AWS_ACCESS_KEY_ID=abc -e AWS_SECRET_ACCESS_KEY=def -e ASPNETCORE_ENVIRONMENT=Staging tag-system
 ```
 
 ## Production
-1. 啟動 Application
+1. Build Image (optional)
+```
+docker build -t tag-system .
+```
+
+2. 啟動 TagSystem
 ```
 docker-compose up
 ```
 
-2. 操作 NoSQL Workbench 新增 Table
+3. 新增 Table (optional)
+- 操作 NoSQL Workbench
 - Commit to Amazon DynamoDB
 
 # 啟動 DynamoDB
