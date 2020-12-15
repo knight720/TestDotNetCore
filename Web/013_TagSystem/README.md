@@ -101,7 +101,7 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 
 In the document model, the primary classes are Table and Document. The Table class provides data operation methods such as PutItem, GetItem, and DeleteItem. It also provides the Query and the Scan methods. The Document class represents a single item in a table.
 
-> [.NET: Document Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKMidLevel.html)
+> [.NET: Document Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKMidLevel.html)  
 > [Getting Started with .NET and DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.NET.html)  
 > [Which is the best way to pass AWS credentials to Docker container?](https://stackoverflow.com/questions/36354423/which-is-the-best-way-to-pass-aws-credentials-to-docker-container)  
 
