@@ -1,8 +1,8 @@
 # Evironment
 - Development  
-本機開發，連線至 host dynamodb
+本機開發，連線至 host DynamoDB
 - Staging  
-docker image 測試，連線至 host dynamodb
+docker image 測試，連線至 host DynamoDB
 - Production  
 docker compose 的整合測試
 
