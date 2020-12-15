@@ -1,9 +1,13 @@
 version: '3.7'
 services:
   tag-system:
-   image: tag-system:dev
+   image: tag-system:latest
    ports:
     - "5000:80"
+   environment:
+    - ASPNETCORE_ENVIRONMENT=Production
+    - AWS_ACCESS_KEY_ID=abc
+    - AWS_SECRET_ACCESS_KEY=def
    depends_on:
     - dynamodb-local
   dynamodb-local:

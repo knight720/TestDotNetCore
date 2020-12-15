@@ -38,8 +38,21 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 
 # Build Image
 ```
-docker build -t tag-system:dev .
+docker build -t tag-system .
 ```
+
+# TagSystem
+```
+docker run --rm -it -p 5000:80 -e AWS_ACCESS_KEY_ID=abc -e AWS_SECRET_ACCESS_KEY=def -e ASPNETCORE_ENVIRONMENT=Staging tag-system
+```
+
+# Evironment
+- Development  
+本機開發，連線至 host dynamodb
+- Staging  
+docker image 測試，連線至 host dynamodb
+- Production  
+docker compose 的整合測試
 
 # Reference
 > [Docker image](https://hub.docker.com/r/cnadiminti/dynamodb-local/)  
