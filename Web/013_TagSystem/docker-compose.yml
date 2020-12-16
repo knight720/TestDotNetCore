@@ -3,7 +3,7 @@ services:
   tag-system:
    image: tag-system:latest
    ports:
-    - "5000:80"
+    - 5000:80
    environment:
     - ASPNETCORE_ENVIRONMENT=Production
     - AWS_ACCESS_KEY_ID=abc
@@ -14,5 +14,5 @@ services:
    image: amazon/dynamodb-local:latest
    container_name: dynamodb-local
    ports:
-    - "8000:8000"
-   command: "-jar DynamoDBLocal.jar  -sharedDb -inMemory"
+    - 8000:8000
+   command: -jar DynamoDBLocal.jar -sharedDb -inMemory
