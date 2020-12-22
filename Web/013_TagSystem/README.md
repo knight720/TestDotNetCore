@@ -114,3 +114,6 @@ In the document model, the primary classes are Table and Document. The Table cla
 
 #### 效能提升到最高且輸送量成本降到最低的建議
 > [使用 DynamoDB 進行設計和建構的最佳實務](https://docs.aws.amazon.com/zh_tw/amazondynamodb/latest/developerguide/best-practices.html)
+
+####
+> [Run applications in a .NET SDK container](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-in-sdk-container.md)

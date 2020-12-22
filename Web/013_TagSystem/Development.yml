@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  tag-system:
+   image: mcr.microsoft.com/dotnet/sdk:3.1
+   ports:
+    - 5000:80
+   environment:
+    - ASPNETCORE_ENVIRONMENT=Production
+    - AWS_ACCESS_KEY_ID=abc
+    - AWS_SECRET_ACCESS_KEY=def
+   depends_on:
+    - dynamodb-local
+   volumes:
+    - .:/app
+   working_dir: /app/TagSystem
+   command: dotnet watch run --urls=http://+:80 --no-resotre
+  dynamodb-local:
+   image: amazon/dynamodb-local:latest
+   container_name: dynamodb-local
+   ports:
+    - 8000:8000
+   command: -jar DynamoDBLocal.jar -sharedDb -inMemory
