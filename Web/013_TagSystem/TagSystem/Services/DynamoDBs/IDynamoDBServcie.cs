@@ -27,5 +27,7 @@ namespace TagSystem.Services.DynamoDBs
         Task<QueryResponse> QueryAsync(QueryRequest qRequest);
 
         bool CreateTable(Models.DynamoDBs.DataModel dataModel);
+
+        bool DeleteTable(string tableName);
     }
 }

@@ -7,6 +7,9 @@ GET {{host}}/api/data
 @tableName = T003
 POST {{host}}/api/data/{{tableName}}
 
+### Delete Table
+DELETE {{host}}/api/data/{{tableName}}
+
 
 ### Get Tag by TagName
 @tagId = 1c9f54c59df9

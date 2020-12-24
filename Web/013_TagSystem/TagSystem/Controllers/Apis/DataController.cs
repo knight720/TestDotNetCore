@@ -42,7 +42,8 @@ namespace TagSystem.Controllers.Apis
         [HttpPost("Create")]
         public ActionResult PostCreate(DataModel dataModel)
         {
-            bool result = this._dynamoDBServcie.CreateTable(dataModel);
+            var result = this._dynamoDBServcie.CreateTable(dataModel);
+
             if (result)
             {
                 return Ok();
@@ -50,6 +51,21 @@ namespace TagSystem.Controllers.Apis
             else
             {
                 return this.StatusCode(500, "Create Fail");
+            }
+        }
+
+        [HttpDelete("{tableName}")]
+        public ActionResult Delete(string tableName)
+        {
+            var result = this._dynamoDBServcie.DeleteTable(tableName);
+
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return this.StatusCode(500, "Delete Fail");
             }
         }
     }

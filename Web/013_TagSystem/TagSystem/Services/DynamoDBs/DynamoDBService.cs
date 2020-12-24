@@ -116,14 +116,36 @@ namespace TagSystem.Services.DynamoDBs
                 request.AttributeDefinitions.Add(dataModel.KeyAttributes.SortKey.ToAttributeDefinition());
             }
 
-            foreach (var i in dataModel.NonKeyAttributes)
-            {
-                request.AttributeDefinitions.Add(i.ToAttributeDefinition());
-            }
+            //foreach (var i in dataModel.NonKeyAttributes)
+            //{
+            //    request.AttributeDefinitions.Add(i.ToAttributeDefinition());
+            //}
 
             try
             {
                 GetClient().CreateTableAsync(request).Wait();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(default, ex, "");
+                response = false;
+            }
+
+            return response;
+        }
+
+        public bool DeleteTable(string tableName)
+        {
+            var response = true;
+
+            var request = new DeleteTableRequest
+            {
+                TableName = tableName,
+            };
+
+            try
+            {
+                GetClient().DeleteTableAsync(request).Wait();
             }
             catch (Exception ex)
             {
