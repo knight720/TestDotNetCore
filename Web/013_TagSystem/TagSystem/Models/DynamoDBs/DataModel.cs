@@ -21,11 +21,8 @@ namespace TagSystem.Models.DynamoDBs
         public string AWSService { get; set; }
     }
 
-    public class PartitionKey
+    public class PartitionKey : AttributeBase
     {
-        public string AttributeName { get; set; }
-        public string AttributeType { get; set; }
-
         public KeySchemaElement ToKeySchemaElement()
         {
             return new KeySchemaElement
@@ -34,37 +31,16 @@ namespace TagSystem.Models.DynamoDBs
                 KeyType = KeyType.HASH,
             };
         }
-
-        public AttributeDefinition ToAttributeDefinition()
-        {
-            return new AttributeDefinition
-            {
-                AttributeName = this.AttributeName,
-                AttributeType = this.AttributeType,
-            };
-        }
     }
 
-    public class SortKey
+    public class SortKey : AttributeBase
     {
-        public string AttributeName { get; set; }
-        public string AttributeType { get; set; }
-
         public KeySchemaElement ToKeySchemaElement()
         {
             return new KeySchemaElement
             {
                 AttributeName = this.AttributeName,
                 KeyType = KeyType.RANGE,
-            };
-        }
-
-        public AttributeDefinition ToAttributeDefinition()
-        {
-            return new AttributeDefinition
-            {
-                AttributeName = this.AttributeName,
-                AttributeType = this.AttributeType,
             };
         }
     }
@@ -75,19 +51,8 @@ namespace TagSystem.Models.DynamoDBs
         public SortKey SortKey { get; set; }
     }
 
-    public class NonKeyAttribute
+    public class NonKeyAttribute : AttributeBase
     {
-        public string AttributeName { get; set; }
-        public string AttributeType { get; set; }
-
-        public AttributeDefinition ToAttributeDefinition()
-        {
-            return new AttributeDefinition
-            {
-                AttributeName = this.AttributeName,
-                AttributeType = this.AttributeType,
-            };
-        }
     }
 
     public class PartitionKey2
