@@ -25,5 +25,7 @@ namespace TagSystem.Services.DynamoDBs
         BatchWriteItemResponse BatchWriteItem(BatchWriteItemRequest request);
 
         Task<QueryResponse> QueryAsync(QueryRequest qRequest);
+
+        bool CreateTable(Models.DynamoDBs.DataModel dataModel);
     }
 }

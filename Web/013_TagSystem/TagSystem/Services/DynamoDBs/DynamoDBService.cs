@@ -93,6 +93,42 @@ namespace TagSystem.Services.DynamoDBs
             return response;
         }
 
+        public bool CreateTable(Models.DynamoDBs.DataModel dataModel)
+        {
+            var response = true;
+
+            var request = new CreateTableRequest
+            {
+                TableName = dataModel.TableName,
+            };
+
+            request.KeySchema.Add(
+                new KeySchemaElement
+                {
+                    AttributeName = dataModel.KeyAttributes.PartitionKey.AttributeName,
+                    KeyType = "HASH",
+                });
+
+            request.AttributeDefinitions.Add(
+                new AttributeDefinition
+                {
+                    AttributeName = dataModel.KeyAttributes.SortKey.AttributeName,
+                    AttributeType = dataModel.KeyAttributes.SortKey.AttributeType,
+                });
+
+            try
+            {
+                GetClient().CreateTableAsync(request).Wait();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(default, ex, "");
+                response = false;
+            }
+
+            return response;
+        }
+
         public async Task<bool> TableExist(string tableName)
         {
             var response = await this.TableList();

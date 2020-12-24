@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TagSystem.Models.DynamoDBs;
 using TagSystem.Services.DynamoDBs;
 
 namespace TagSystem.Controllers.Apis
@@ -36,6 +37,20 @@ namespace TagSystem.Controllers.Apis
         public void Post(string tableName)
         {
             this._dynamoDBServcie.CreateTable(tableName);
+        }
+
+        [HttpPost("Create")]
+        public ActionResult PostCreate(DataModel dataModel)
+        {
+            bool result = this._dynamoDBServcie.CreateTable(dataModel);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return this.StatusCode(500, "Create Fail");
+            }
         }
     }
 }
