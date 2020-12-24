@@ -100,21 +100,26 @@ namespace TagSystem.Services.DynamoDBs
             var request = new CreateTableRequest
             {
                 TableName = dataModel.TableName,
+                ProvisionedThroughput = new ProvisionedThroughput
+                {
+                    ReadCapacityUnits = 10,
+                    WriteCapacityUnits = 5
+                },
             };
 
-            request.KeySchema.Add(
-                new KeySchemaElement
-                {
-                    AttributeName = dataModel.KeyAttributes.PartitionKey.AttributeName,
-                    KeyType = "HASH",
-                });
+            request.KeySchema.Add(dataModel.KeyAttributes.PartitionKey.ToKeySchemaElement());
+            request.AttributeDefinitions.Add(dataModel.KeyAttributes.PartitionKey.ToAttributeDefinition());
 
-            request.AttributeDefinitions.Add(
-                new AttributeDefinition
-                {
-                    AttributeName = dataModel.KeyAttributes.SortKey.AttributeName,
-                    AttributeType = dataModel.KeyAttributes.SortKey.AttributeType,
-                });
+            if (string.IsNullOrWhiteSpace(dataModel.KeyAttributes.SortKey?.AttributeName) == false)
+            {
+                request.KeySchema.Add(dataModel.KeyAttributes.SortKey.ToKeySchemaElement());
+                request.AttributeDefinitions.Add(dataModel.KeyAttributes.SortKey.ToAttributeDefinition());
+            }
+
+            foreach (var i in dataModel.NonKeyAttributes)
+            {
+                request.AttributeDefinitions.Add(i.ToAttributeDefinition());
+            }
 
             try
             {

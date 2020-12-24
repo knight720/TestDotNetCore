@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 
 namespace TagSystem.Models.DynamoDBs
 {
@@ -23,12 +25,48 @@ namespace TagSystem.Models.DynamoDBs
     {
         public string AttributeName { get; set; }
         public string AttributeType { get; set; }
+
+        public KeySchemaElement ToKeySchemaElement()
+        {
+            return new KeySchemaElement
+            {
+                AttributeName = this.AttributeName,
+                KeyType = KeyType.HASH,
+            };
+        }
+
+        public AttributeDefinition ToAttributeDefinition()
+        {
+            return new AttributeDefinition
+            {
+                AttributeName = this.AttributeName,
+                AttributeType = this.AttributeType,
+            };
+        }
     }
 
     public class SortKey
     {
         public string AttributeName { get; set; }
         public string AttributeType { get; set; }
+
+        public KeySchemaElement ToKeySchemaElement()
+        {
+            return new KeySchemaElement
+            {
+                AttributeName = this.AttributeName,
+                KeyType = KeyType.RANGE,
+            };
+        }
+
+        public AttributeDefinition ToAttributeDefinition()
+        {
+            return new AttributeDefinition
+            {
+                AttributeName = this.AttributeName,
+                AttributeType = this.AttributeType,
+            };
+        }
     }
 
     public class KeyAttributes
@@ -41,6 +79,15 @@ namespace TagSystem.Models.DynamoDBs
     {
         public string AttributeName { get; set; }
         public string AttributeType { get; set; }
+
+        public AttributeDefinition ToAttributeDefinition()
+        {
+            return new AttributeDefinition
+            {
+                AttributeName = this.AttributeName,
+                AttributeType = this.AttributeType,
+            };
+        }
     }
 
     public class PartitionKey2
