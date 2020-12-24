@@ -36,7 +36,16 @@ namespace TagSystem.Controllers.Apis
         [HttpPost("{tableName}")]
         public void Post(string tableName)
         {
-            this._dynamoDBServcie.CreateTable(tableName);
+            var result = this._dynamoDBServcie.CreateTable(tableName);
+
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return this.StatusCode(500, "Create Fail");
+            }
         }
 
         [HttpPost("Create")]

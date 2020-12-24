@@ -82,7 +82,7 @@ namespace TagSystem.Services.DynamoDBs
 
             try
             {
-                GetClient().CreateTableAsync(request);
+                GetClient().CreateTableAsync(request).Wait();
             }
             catch (Exception ex)
             {
@@ -115,11 +115,6 @@ namespace TagSystem.Services.DynamoDBs
                 request.KeySchema.Add(dataModel.KeyAttributes.SortKey.ToKeySchemaElement());
                 request.AttributeDefinitions.Add(dataModel.KeyAttributes.SortKey.ToAttributeDefinition());
             }
-
-            //foreach (var i in dataModel.NonKeyAttributes)
-            //{
-            //    request.AttributeDefinitions.Add(i.ToAttributeDefinition());
-            //}
 
             try
             {
