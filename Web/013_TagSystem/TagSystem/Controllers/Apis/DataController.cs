@@ -23,7 +23,7 @@ namespace TagSystem.Controllers.Apis
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            return Ok(string.Join(',', await this._dynamoDBServcie.TableList()));
+            return Ok(await this._dynamoDBServcie.TableList());
         }
 
         [HttpGet("{tableName}")]
@@ -34,7 +34,7 @@ namespace TagSystem.Controllers.Apis
 
         // POST api/<TagsController>
         [HttpPost("{tableName}")]
-        public void Post(string tableName)
+        public ActionResult Post(string tableName)
         {
             var result = this._dynamoDBServcie.CreateTable(tableName);
 

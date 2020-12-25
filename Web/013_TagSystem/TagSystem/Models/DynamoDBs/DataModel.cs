@@ -49,28 +49,12 @@ namespace TagSystem.Models.DynamoDBs
     {
         public PartitionKey PartitionKey { get; set; }
         public SortKey SortKey { get; set; }
+
+
     }
 
     public class NonKeyAttribute : AttributeBase
     {
-    }
-
-    public class PartitionKey2
-    {
-        public string AttributeName { get; set; }
-        public string AttributeType { get; set; }
-    }
-
-    public class SortKey2
-    {
-        public string AttributeName { get; set; }
-        public string AttributeType { get; set; }
-    }
-
-    public class KeyAttributes2
-    {
-        public PartitionKey2 PartitionKey { get; set; }
-        public SortKey2 SortKey { get; set; }
     }
 
     public class Projection
@@ -81,7 +65,7 @@ namespace TagSystem.Models.DynamoDBs
     public class GlobalSecondaryIndex
     {
         public string IndexName { get; set; }
-        public KeyAttributes2 KeyAttributes { get; set; }
+        public KeyAttributes KeyAttributes { get; set; }
         public Projection Projection { get; set; }
     }
 

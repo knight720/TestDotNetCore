@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
@@ -100,21 +101,42 @@ namespace TagSystem.Services.DynamoDBs
             var request = new CreateTableRequest
             {
                 TableName = dataModel.TableName,
-                ProvisionedThroughput = new ProvisionedThroughput
-                {
-                    ReadCapacityUnits = 10,
-                    WriteCapacityUnits = 5
-                },
+                ProvisionedThroughput = new ProvisionedThroughput(1,1),
             };
 
+            var attributes = new List<Models.DynamoDBs.AttributeBase>();
+
             request.KeySchema.Add(dataModel.KeyAttributes.PartitionKey.ToKeySchemaElement());
-            request.AttributeDefinitions.Add(dataModel.KeyAttributes.PartitionKey.ToAttributeDefinition());
+            attributes.Add(dataModel.KeyAttributes.PartitionKey);
 
             if (string.IsNullOrWhiteSpace(dataModel.KeyAttributes.SortKey?.AttributeName) == false)
             {
                 request.KeySchema.Add(dataModel.KeyAttributes.SortKey.ToKeySchemaElement());
-                request.AttributeDefinitions.Add(dataModel.KeyAttributes.SortKey.ToAttributeDefinition());
+                attributes.Add(dataModel.KeyAttributes.SortKey);
             }
+
+            foreach (var i in dataModel.GlobalSecondaryIndexes)
+            {
+                var gsi = new GlobalSecondaryIndex
+                {
+                    IndexName = i.IndexName,
+                    Projection = new Projection
+                    {
+                        ProjectionType = ProjectionType.ALL,
+                    },
+                    ProvisionedThroughput = new ProvisionedThroughput(1,1),
+                };
+
+                gsi.KeySchema.Add(i.KeyAttributes.PartitionKey.ToKeySchemaElement());
+                gsi.KeySchema.Add(i.KeyAttributes.SortKey.ToKeySchemaElement());
+
+                request.GlobalSecondaryIndexes.Add(gsi);
+
+                attributes.Add(i.KeyAttributes.PartitionKey);
+                attributes.Add(i.KeyAttributes.SortKey);
+            }
+
+            request.AttributeDefinitions.AddRange(attributes.Distinct().Select(i => i.ToAttributeDefinition()));
 
             try
             {
