@@ -16,14 +16,14 @@ docker compose 的整合測試
 docker-compose -f dynamodb.yml up
 ```
 
-2.  新增 Table (optional)
-- REST Client 
-- ExampleApi.http
-
-3. 啟動 TagSystem
+2. 啟動 TagSystem
 ```
 dotnet TagSystem.dll
 ```
+
+3.  新增 Table (optional)
+- REST Client 
+- ExampleApi.http
 
 ## Staging
 1. 啟動 Local DynamoDB
@@ -31,19 +31,19 @@ dotnet TagSystem.dll
 docker-compose -f dynamodb.yml up
 ```
 
-2.  新增 Table (optional)
-- REST Client 
-- ExampleApi.http
-
-3. Build Image (optional)
+2. Build Image (optional)
 ```
 docker build -t tag-system .
 ```
 
-4. 啟動 TagSystem
+3. 啟動 TagSystem
 ```
 docker run --rm -it -p 5000:80 -e AWS_ACCESS_KEY_ID=abc -e AWS_SECRET_ACCESS_KEY=def -e ASPNETCORE_ENVIRONMENT=Staging tag-system
 ```
+
+4.  新增 Table (optional)
+- REST Client 
+- ExampleApi.http
 
 ## Production
 1. Build Image (optional)
