@@ -1,5 +1,8 @@
 @host = http://localhost:5000
 
+### Get Info
+GET {{host}}/api/info
+
 ### Get Table List
 GET {{host}}/api/tables
 
@@ -9,6 +12,58 @@ POST {{host}}/api/tables/{{tableName}}
 
 ### Delete Table
 DELETE {{host}}/api/tables/{{tableName}}
+
+### Create Table by json
+POST {{host}}/api/tables/create
+Content-Type: application/json
+
+{
+   "TableName":"Tags",
+   "KeyAttributes":{
+      "PartitionKey":{
+         "AttributeName":"PK",
+         "AttributeType":"S"
+      },
+      "SortKey":{
+         "AttributeName":"SK",
+         "AttributeType":"S"
+      }
+   },
+   "GlobalSecondaryIndexes":[
+      {
+         "IndexName":"BySalePageId",
+         "KeyAttributes":{
+            "PartitionKey":{
+               "AttributeName":"SK",
+               "AttributeType":"S"
+            },
+            "SortKey":{
+               "AttributeName":"PK",
+               "AttributeType":"S"
+            }
+         },
+         "Projection":{
+            "ProjectionType":"ALL"
+         }
+      },
+      {
+         "IndexName":"ByShop",
+         "KeyAttributes":{
+            "PartitionKey":{
+               "AttributeName":"ShopId",
+               "AttributeType":"S"
+            },
+            "SortKey":{
+               "AttributeName":"PK",
+               "AttributeType":"S"
+            }
+         },
+         "Projection":{
+            "ProjectionType":"ALL"
+         }
+      }
+   ]
+}
 
 
 ### Get Tag by TagName

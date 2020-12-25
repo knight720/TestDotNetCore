@@ -1,3 +1,6 @@
+# TODO
+- ProvisionedThroughput
+
 # Evironment
 - Development  
 本機開發，連線至 host DynamoDB
