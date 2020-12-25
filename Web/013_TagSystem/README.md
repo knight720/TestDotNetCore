@@ -14,8 +14,8 @@ docker-compose -f dynamodb.yml up
 ```
 
 2.  新增 Table (optional)
-- 操作 NoSQL Workbench
-- Commit to Amazon DynamoDB
+- REST Client 
+- ExampleApi.http
 
 3. 啟動 TagSystem
 ```
@@ -29,8 +29,8 @@ docker-compose -f dynamodb.yml up
 ```
 
 2.  新增 Table (optional)
-- 操作 NoSQL Workbench
-- Commit to Amazon DynamoDB
+- REST Client 
+- ExampleApi.http
 
 3. Build Image (optional)
 ```
@@ -54,8 +54,8 @@ docker-compose up
 ```
 
 3. 新增 Table (optional)
-- 操作 NoSQL Workbench
-- Commit to Amazon DynamoDB
+- REST Client 
+- ExampleApi.http
 
 # 啟動 DynamoDB
 - by docker
@@ -105,15 +105,15 @@ In the document model, the primary classes are Table and Document. The Table cla
 > [Getting Started with .NET and DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.NET.html)  
 > [Which is the best way to pass AWS credentials to Docker container?](https://stackoverflow.com/questions/36354423/which-is-the-best-way-to-pass-aws-credentials-to-docker-container)  
 
-#### Local DynamoDB
-- -sharedDb
+#### DynamoDB
+- Local DynamoDB  
+-sharedDb
 > [DynamoDB Local Usage Notes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html)
+- 效能提升到最高且輸送量成本降到最低的建議
+> [使用 DynamoDB 進行設計和建構的最佳實務](https://docs.aws.amazon.com/zh_tw/amazondynamodb/latest/developerguide/best-practices.html)
 
 #### GUI Tool
 > [Download NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.settingup.html)
 
-#### 效能提升到最高且輸送量成本降到最低的建議
-> [使用 DynamoDB 進行設計和建構的最佳實務](https://docs.aws.amazon.com/zh_tw/amazondynamodb/latest/developerguide/best-practices.html)
-
-####
+#### Container
 > [Run applications in a .NET SDK container](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-in-sdk-container.md)

@@ -20,21 +20,12 @@ GET {{host}}/api/tags/{{tagId}}
 @tagId = TAG%231c9f54c59df9
 GET {{host}}/api/tags/{{shopId}}/{{tagId}}
 
-### Create Tag
-
-POST {{host}}/api/tags
-Content-Type: application/json
-
-{
-    
-}
-
 ### Query Tag
 POST {{host}}/api/tags/query
 Content-Type: application/json
 
 {
-    "PK": "TAG#1c9f54c59df9"
+    "PK": "TAG#001"
 }
 
 ### Create Tag
