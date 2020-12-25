@@ -7,11 +7,11 @@ namespace TagSystem.Controllers.Apis
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DataController : ControllerBase
+    public class TablesController : ControllerBase
     {
         private readonly IDynamoDBServcie _dynamoDBServcie;
 
-        public DataController(IDynamoDBServcie dynamoDBServcie)
+        public TablesController(IDynamoDBServcie dynamoDBServcie)
         {
             this._dynamoDBServcie = dynamoDBServcie;
         }

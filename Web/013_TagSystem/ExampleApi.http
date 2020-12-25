@@ -1,14 +1,14 @@
 @host = http://localhost:5000
 
 ### Get Table List
-GET {{host}}/api/data
+GET {{host}}/api/tables
 
 ### Create Table
-@tableName = T003
-POST {{host}}/api/data/{{tableName}}
+@tableName = Table02
+POST {{host}}/api/tables/{{tableName}}
 
 ### Delete Table
-DELETE {{host}}/api/data/{{tableName}}
+DELETE {{host}}/api/tables/{{tableName}}
 
 
 ### Get Tag by TagName
