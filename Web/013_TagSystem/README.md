@@ -10,7 +10,7 @@ docker image 測試，連線至 host DynamoDB
 docker compose 的整合測試
 
 # How To Start
-## development
+## Development
 1. 啟動 Local DynamoDB
 ```
 docker-compose -f dynamodb.yml up
@@ -114,6 +114,9 @@ In the document model, the primary classes are Table and Document. The Table cla
 > [DynamoDB Local Usage Notes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html)
 - 效能提升到最高且輸送量成本降到最低的建議
 > [使用 DynamoDB 進行設計和建構的最佳實務](https://docs.aws.amazon.com/zh_tw/amazondynamodb/latest/developerguide/best-practices.html)
+- ProvisionedThroughput
+> [Read/Write Capacity Mode and Throughput](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html#default-limits-throughput-capacity-modes)  
+> [Read/Write Capacity Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html)
 
 #### GUI Tool
 > [Download NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.settingup.html)
