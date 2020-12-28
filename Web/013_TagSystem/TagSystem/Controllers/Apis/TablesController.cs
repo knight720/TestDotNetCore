@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TagSystem.Models.DynamoDBs;
 using TagSystem.Services.DynamoDBs;
@@ -36,45 +37,43 @@ namespace TagSystem.Controllers.Apis
         [HttpPost("{tableName}")]
         public ActionResult Post(string tableName)
         {
-            var result = this._dynamoDBServcie.CreateTable(tableName);
-
-            if (result)
+            try
             {
+                this._dynamoDBServcie.CreateTable(tableName);
                 return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                return this.StatusCode(500, "Create Fail");
+                return this.StatusCode(500, $"Create Fail{Environment.NewLine}{ex.Message}");
             }
         }
 
         [HttpPost("Create")]
         public ActionResult PostCreate(DataModel dataModel)
         {
-            var result = this._dynamoDBServcie.CreateTable(dataModel);
-
-            if (result)
+            try
             {
+                this._dynamoDBServcie.CreateTable(dataModel);
                 return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                return this.StatusCode(500, "Create Fail");
+                return this.StatusCode(500, $"Create Fail{Environment.NewLine}{ex.Message}");
             }
         }
 
         [HttpDelete("{tableName}")]
         public ActionResult Delete(string tableName)
         {
-            var result = this._dynamoDBServcie.DeleteTable(tableName);
-
-            if (result)
+            try
             {
+                this._dynamoDBServcie.DeleteTable(tableName);
+
                 return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                return this.StatusCode(500, "Delete Fail");
+                return this.StatusCode(500, $"Delete Fail{Environment.NewLine}{ex.Message}");
             }
         }
     }

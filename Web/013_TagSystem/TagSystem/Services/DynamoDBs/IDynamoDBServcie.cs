@@ -8,7 +8,7 @@ namespace TagSystem.Services.DynamoDBs
 {
     public interface IDynamoDBServcie
     {
-        bool CreateTable(string tableName);
+        void CreateTable(string tableName);
 
         Task<List<string>> TableList();
 
@@ -26,8 +26,8 @@ namespace TagSystem.Services.DynamoDBs
 
         Task<QueryResponse> QueryAsync(QueryRequest qRequest);
 
-        bool CreateTable(Models.DynamoDBs.DataModel dataModel);
+        void CreateTable(Models.DynamoDBs.DataModel dataModel);
 
-        bool DeleteTable(string tableName);
+        void DeleteTable(string tableName);
     }
 }

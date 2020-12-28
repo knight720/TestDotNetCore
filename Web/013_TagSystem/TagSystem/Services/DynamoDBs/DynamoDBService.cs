@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
@@ -51,10 +50,8 @@ namespace TagSystem.Services.DynamoDBs
         /// Creates the table.
         /// </summary>
         /// <returns></returns>
-        public bool CreateTable(string tableName)
+        public void CreateTable(string tableName)
         {
-            var response = true;
-
             var request = new CreateTableRequest
             {
                 TableName = tableName,
@@ -81,27 +78,15 @@ namespace TagSystem.Services.DynamoDBs
                 },
             };
 
-            try
-            {
-                GetClient().CreateTableAsync(request).Wait();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(default, ex, "");
-                response = false;
-            }
-
-            return response;
+            GetClient().CreateTableAsync(request).Wait();
         }
 
-        public bool CreateTable(Models.DynamoDBs.DataModel dataModel)
+        public void CreateTable(Models.DynamoDBs.DataModel dataModel)
         {
-            var response = true;
-
             var request = new CreateTableRequest
             {
                 TableName = dataModel.TableName,
-                ProvisionedThroughput = new ProvisionedThroughput(1,1),
+                ProvisionedThroughput = new ProvisionedThroughput(1, 1),
             };
 
             var attributes = new List<Models.DynamoDBs.AttributeBase>();
@@ -124,7 +109,7 @@ namespace TagSystem.Services.DynamoDBs
                     {
                         ProjectionType = ProjectionType.ALL,
                     },
-                    ProvisionedThroughput = new ProvisionedThroughput(1,1),
+                    ProvisionedThroughput = new ProvisionedThroughput(1, 1),
                 };
 
                 gsi.KeySchema.Add(i.KeyAttributes.PartitionKey.ToKeySchemaElement());
@@ -138,20 +123,10 @@ namespace TagSystem.Services.DynamoDBs
 
             request.AttributeDefinitions.AddRange(attributes.Distinct().Select(i => i.ToAttributeDefinition()));
 
-            try
-            {
-                GetClient().CreateTableAsync(request).Wait();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(default, ex, "");
-                response = false;
-            }
-
-            return response;
+            GetClient().CreateTableAsync(request).Wait();
         }
 
-        public bool DeleteTable(string tableName)
+        public void DeleteTable(string tableName)
         {
             var response = true;
 
@@ -160,17 +135,7 @@ namespace TagSystem.Services.DynamoDBs
                 TableName = tableName,
             };
 
-            try
-            {
-                GetClient().DeleteTableAsync(request).Wait();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(default, ex, "");
-                response = false;
-            }
-
-            return response;
+            GetClient().DeleteTableAsync(request).Wait();
         }
 
         public async Task<bool> TableExist(string tableName)
