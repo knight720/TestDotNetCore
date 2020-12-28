@@ -44,7 +44,7 @@ namespace TagSystem.Controllers.Apis
             }
             catch (Exception ex)
             {
-                return this.StatusCode(500, $"Create Fail{Environment.NewLine}{ex.Message}");
+                return this.StatusCode(500, $"{ex.Message}");
             }
         }
 
@@ -58,7 +58,7 @@ namespace TagSystem.Controllers.Apis
             }
             catch (Exception ex)
             {
-                return this.StatusCode(500, $"Create Fail{Environment.NewLine}{ex.Message}");
+                return this.StatusCode(500, $"{ex.Message}");
             }
         }
 
@@ -73,7 +73,7 @@ namespace TagSystem.Controllers.Apis
             }
             catch (Exception ex)
             {
-                return this.StatusCode(500, $"Delete Fail{Environment.NewLine}{ex.Message}");
+                return this.StatusCode(500, $"{ex.Message}");
             }
         }
     }
