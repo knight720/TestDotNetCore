@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.Loader;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +23,11 @@ namespace WebApplication1.Controllers
         private bool _started = false;
         public static bool Unloading = false;
 
+        static WeatherForecastController()
+        {
+            AssemblyLoadContext.Default.Unloading += Default_Unloading;
+        }
+
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IHostApplicationLifetime hostApplicationLifetime)
         {
             _logger = logger;
@@ -31,6 +37,12 @@ namespace WebApplication1.Controllers
             this._hostApplicationLifetime.ApplicationStopping.Register(() => Thread.Sleep(6000));
 
             this._logger.LogInformation($"Started: {this._started}");
+        }
+
+        private static void Default_Unloading(AssemblyLoadContext obj)
+        {
+            WeatherForecastController.Unloading = true;
+            Thread.Sleep(3000);
         }
 
         [HttpGet]
