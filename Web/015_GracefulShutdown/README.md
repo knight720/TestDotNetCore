@@ -1,3 +1,8 @@
+- Build Image
+```
+.\build.ps1
+```
+
 - 執行 container
 ```
 docker run --rm -p 5000:80 graceful-shutdown:20210801-1618

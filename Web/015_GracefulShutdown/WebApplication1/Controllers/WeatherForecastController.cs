@@ -33,8 +33,11 @@ namespace WebApplication1.Controllers
             _logger = logger;
             this._hostApplicationLifetime = hostApplicationLifetime;
             this._hostApplicationLifetime.ApplicationStarted.Register(() => this._started = true);
-            this._hostApplicationLifetime.ApplicationStopping.Register(() => this._stopping = true);
-            this._hostApplicationLifetime.ApplicationStopping.Register(() => Thread.Sleep(6000));
+            this._hostApplicationLifetime.ApplicationStopping.Register(() =>
+            {
+                this._stopping = true;
+                Thread.Sleep(6000);
+            });
 
             this._logger.LogInformation($"Started: {this._started}");
         }
