@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace WebApplication1.Controllers
@@ -17,23 +17,50 @@ namespace WebApplication1.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
+        private bool _stopping = false;
+        private bool _started = false;
+        public static bool Unloading = false;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IHostApplicationLifetime hostApplicationLifetime)
         {
             _logger = logger;
+            this._hostApplicationLifetime = hostApplicationLifetime;
+            this._hostApplicationLifetime.ApplicationStarted.Register(() => this._started = true);
+            this._hostApplicationLifetime.ApplicationStopping.Register(() => this._stopping = true);
+            this._hostApplicationLifetime.ApplicationStopping.Register(() => Thread.Sleep(6000));
+
+            this._logger.LogInformation($"Started: {this._started}");
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Get(CancellationToken cancellationToken)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            this._logger.LogInformation($"{DateTime.Now.ToString("mm:ss")}");
+            this._logger.LogInformation($"Stopping: {this._stopping}");
+            this._logger.LogInformation($"token: {cancellationToken.IsCancellationRequested}");
+            this._logger.LogInformation($"Unloading: {WeatherForecastController.Unloading}");
+
+            if (_stopping == true)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                this._logger.LogInformation("503");
+                return this.StatusCode((int)HttpStatusCode.ServiceUnavailable);
+            }
+
+            if (cancellationToken.IsCancellationRequested == true)
+            {
+                this._logger.LogInformation("404");
+                return this.StatusCode((int)HttpStatusCode.NotFound);
+            }
+
+            if (WeatherForecastController.Unloading == true)
+            {
+                this._logger.LogInformation("500");
+                return this.StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+
+            this._logger.LogInformation("200");
+            return this.Ok(DateTime.Now.Ticks);
         }
     }
 }
