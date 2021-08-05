@@ -13,6 +13,11 @@ docker run --rm -p 5000:80 graceful-shutdown:20210801-1618
 Watch-Command {Invoke-WebRequest http://localhost:5000/WeatherForecast} -Continuous -Second 1
 ```
 
+```
+# bash
+while true; do curl -sSL http://localhost/healthz | xargs -I {} echo `date +%s`: {} ; done
+```
+
 - 中斷 Application
 ```
 docker kill --signal=SIGTERM e7d
@@ -36,3 +41,6 @@ $ docker exec -it 3f2 bash
 
 ## \# kill -s SIGKILL 1
 沒有終止
+
+> [當 .NET Core 執行在 Linux 或 Docker 容器中如何優雅的結束](https://blog.miniasp.com/post/2020/07/22/How-to-handle-graceful-shutdown-in-NET-Core)
+> [CoreCLR should handle SIGTERM as equivalent to Environment.Exit()](https://github.com/dotnet/runtime/issues/4950#issuecomment-394843595)
