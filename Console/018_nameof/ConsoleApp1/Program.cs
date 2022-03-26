@@ -8,6 +8,8 @@ namespace ConsoleApp1
         {
             Console.WriteLine(Season.Summer.ToString());
             Console.WriteLine(nameof(Season.Summer));
+            var season = Season.Summer;
+            Console.WriteLine(nameof(season));
         }
     }
 
