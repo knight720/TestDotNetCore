@@ -14,6 +14,7 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-
+        this._logger.LogDebug("Debug");
+        this._logger.LogInformation("Information");
     }
 }
