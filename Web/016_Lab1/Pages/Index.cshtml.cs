@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace _016_Lab1.Pages;
+namespace WebAPI.Pages;
 
 public class IndexModel : PageModel
 {
