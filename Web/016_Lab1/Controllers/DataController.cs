@@ -7,9 +7,9 @@ namespace WebAPI.Controllers
     public class DataController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string type)
         {
-            return Ok("oK");
+            return Ok($"oK: {type}");
         }
     }
 }
