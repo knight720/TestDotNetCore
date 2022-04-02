@@ -9,7 +9,12 @@ builder.Services.AddScoped<XmlService>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("gov", (s,c) =>
+{
+    var configuration = s.GetRequiredService<IConfiguration>();
+    var domain = configuration.GetValue<string>("GOV_API:DomainName");
+    c.BaseAddress = new Uri(domain);
+});
 
 var app = builder.Build();
 
