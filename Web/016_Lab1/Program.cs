@@ -9,6 +9,8 @@ builder.Services.AddScoped<XmlService>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddHttpClient();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
