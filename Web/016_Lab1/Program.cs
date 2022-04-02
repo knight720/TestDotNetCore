@@ -1,6 +1,10 @@
 using WebAPI.Middlewares;
+using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<JsonService>();
+builder.Services.AddScoped<XmlService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
