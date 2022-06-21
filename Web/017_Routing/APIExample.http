@@ -1,0 +1,12 @@
+@host = https://localhost:7100
+
+###
+GET {{host}}/home
+
+###
+POST {{host}}/post
+
+###
+@value = 123456
+###
+POST {{host}}/postvalue/{{value}}

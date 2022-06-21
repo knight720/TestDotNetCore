@@ -6,6 +6,9 @@ builder.Services.AddHealthChecks()
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
+app.MapGet("/Home", () => "Home");
+app.MapPost("/Post", () => "Post");
+app.MapPost("/PostValue/{value}", (string value) => $"Post: {value}");
 app.MapHealthChecks("/healthz");
 
 app.Run();
