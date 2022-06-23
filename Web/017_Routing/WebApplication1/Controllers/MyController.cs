@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.ControllerBase
 {
+    [Route("api/[controller]")]
     public class MyController : Controller
     {
+        [HttpGet("abc")]
         public IActionResult Index()
         {
-            return View();
+            return Ok("MyController.Index");
         }
     }
 }

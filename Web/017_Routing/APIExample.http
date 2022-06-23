@@ -10,3 +10,6 @@ POST {{host}}/post
 @value = 123456
 ###
 POST {{host}}/postvalue/{{value}}
+
+###
+GET {{host}}/api/my/abc
