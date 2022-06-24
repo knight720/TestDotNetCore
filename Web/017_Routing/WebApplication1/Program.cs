@@ -14,4 +14,10 @@ app.MapHealthChecks("/healthz");
 
 app.MapControllers();
 
+//// Overwrite All Rule
+//app.Run(async context =>
+//{
+//    await context.Response.WriteAsync("Only Hello world!");
+//});
+
 app.Run();
