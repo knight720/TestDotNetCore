@@ -3,8 +3,7 @@ using WebApplication1.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks()
     .AddCheck<MyHealthCheck>("My");
-builder.Services.AddMvc()
-    .AddMvcOptions(option => option.EnableEndpointRouting = false);
+builder.Services.AddControllers();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
@@ -13,6 +12,6 @@ app.MapPost("/Post", () => "Post");
 app.MapPost("/PostValue/{value}", (string value) => $"Post: {value}");
 app.MapHealthChecks("/healthz");
 
-app.UseMvcWithDefaultRoute();
+app.MapControllers();
 
 app.Run();
