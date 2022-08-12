@@ -2,13 +2,11 @@
 
 namespace WebApplication1.ControllerBase
 {
-    [Route("api/[controller]")]
-    public class MyController : Controller
+    public class FirstController : Controller
     {
-        [HttpGet("abc")]
         public IActionResult Index()
         {
-            return Ok("MyController.Index");
+            return Ok("FirstController.Index");
         }
     }
 }
