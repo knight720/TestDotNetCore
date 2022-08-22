@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication1.ControllerBase
+namespace WebApplication1.Controllers
 {
     public class FirstController : Controller
     {
