@@ -81,10 +81,13 @@ void Endpoint_Definition()
     });
 }
 
-void Routing_Controller()
+void Controller()
 {
     app.MapControllers();
+}
 
+void ControllerWithDefault()
+{
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -96,6 +99,7 @@ void Routing_Controller()
 //First_Enpoint();
 //Routing_Basics();
 //Endpoint_Definition();
-Routing_Controller();
+Controller();
+//ControllerWithDefault(); 
 
 app.Run();

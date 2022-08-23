@@ -6,15 +6,15 @@ namespace WebApplication1.Controllers
     public class ConstraintController : Controller
     {
         [HttpGet("{value:int}")]
-        public IActionResult Index1(int value)
+        public IActionResult Index_Int(int value)
         {
-            return Ok($"Constraint Index1 {value}");
+            return Ok($"Constraint Index_Int: {value}");
         }
 
         [HttpGet("{value:alpha}")]
-        public IActionResult Index2(string value)
+        public IActionResult Index_Alpha(string value)
         {
-            return Ok($"Constraint Index2 {value}");
+            return Ok($"Constraint Index_Alpha: {value}");
         }
     }
 }
