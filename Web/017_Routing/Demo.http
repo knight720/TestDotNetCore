@@ -1,0 +1,57 @@
+@host = https://localhost:7100
+
+############ Hello_World ############
+### root URL /
+GET {{host}}
+
+############ Routing_Basics ############
+############ Endpoint_Definition ############
+### define
+GET {{host}}
+### undefine
+GET {{host}}/undefine
+
+############ Terminal_Middleware ############
+### define
+GET {{host}}
+### Routing
+GET {{host}}/Routing
+
+############ Route_Templates ############
+### fixed
+GET {{host}}/brand/apple
+### alpha
+GET {{host}}/brand/banana
+### int
+GET {{host}}/brand/zara
+### int
+GET {{host}}/brand/jazz
+### int
+GET {{host}}/brand/999
+### int
+GET {{host}}/some_name
+
+############ Host_Matching ############
+###
+GET {{host}}
+###
+GET https://www.apple.com:7100
+###
+GET https://www.android.com:7100
+###
+GET http://localhost:5100
+
+############ Controller ############
+############ ControllerWithDefault ############
+###
+GET {{host}}/first/index
+###
+GET {{host}}/api/second/index
+###
+GET {{host}}/api/second/index_two
+###
+GET {{host}}/third/index
+###
+GET {{host}}/third/two
+###
+GET {{host}}/third/three/33
