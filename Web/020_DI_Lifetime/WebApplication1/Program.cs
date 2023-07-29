@@ -12,7 +12,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Logging.AddConsole();
 
+//// 每個 Group 都 new 新的 Engine
+//builder.Services.AddTransient<Engine>();
+//// Group 共用 Engine
 builder.Services.AddScoped<Engine>();
+
 builder.Services.AddScoped<AGroup>();
 builder.Services.AddScoped<BGroup>();
 
