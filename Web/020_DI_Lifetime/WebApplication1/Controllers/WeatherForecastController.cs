@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Services.Groups;
 
 namespace WebApplication1.Controllers
 {
@@ -12,15 +13,23 @@ namespace WebApplication1.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IServiceProvider _serviceProvider;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,
+                                         IServiceProvider serviceProvider)
         {
             _logger = logger;
+            this._serviceProvider = serviceProvider;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var a = this._serviceProvider.GetRequiredService<AGroup>();
+            a.Calculate();
+            var b = this._serviceProvider.GetRequiredService<BGroup>();
+            b.Calculate();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
