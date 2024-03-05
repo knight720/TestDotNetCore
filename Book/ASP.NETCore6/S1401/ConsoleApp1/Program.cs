@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleApp1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+new HostBuilder()
+    .ConfigureServices(svcs => svcs
+    .AddSingleton<IHostedService, PerformanceMetricsCollector>())
+    .Build()
+    .Run();
