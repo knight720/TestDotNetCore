@@ -1,0 +1,18 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+### 
+GET http://localhost:5067
+
+### 
+POST http://localhost:5067/P
+Content-Type: application/json
+
+{
+    "key":1
+}
+
+### 
+POST http://localhost:5067/P
+Content-Type: application/x-www-form-urlencoded
+
+name=foo
+&password=bar
