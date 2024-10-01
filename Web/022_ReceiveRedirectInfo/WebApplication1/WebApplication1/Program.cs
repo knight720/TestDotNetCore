@@ -1,4 +1,9 @@
+using WebApplication1.Model;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddTransient<IResponseService, SequenceResponse>();
+
 var app = builder.Build();
 
 // Approach 1: Terminal Middleware.
@@ -14,7 +19,9 @@ app.Use(async (context, next) =>
             logger.LogInformation($"{requestBody}");
         }
 
-        await context.Response.WriteAsync("Hello World");
+        var responseService = context.RequestServices.GetRequiredService<IResponseService>();
+        //await context.Response.WriteAsync("Hello World");
+        await context.Response.WriteAsync(await responseService.Response());
 
         return;
     }
