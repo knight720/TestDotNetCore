@@ -1,5 +1,5 @@
 ﻿DoAsync();
-//await DoAsync(); // CS4008 無法等候 'void'
+//await DoAsync()
 
 Console.WriteLine("2");
 

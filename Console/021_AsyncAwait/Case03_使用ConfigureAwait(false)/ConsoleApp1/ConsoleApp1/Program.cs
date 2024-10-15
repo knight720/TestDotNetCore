@@ -1,4 +1,5 @@
-﻿await DoAsync().ConfigureAwait(false);
+﻿await DoAsync();
+//await DoAsync().ConfigureAwait(false);
 
 Console.WriteLine("2");
 
