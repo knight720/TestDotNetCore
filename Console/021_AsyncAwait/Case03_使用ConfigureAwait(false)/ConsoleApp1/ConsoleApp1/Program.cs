@@ -5,6 +5,6 @@ Console.WriteLine("2");
 
 async Task DoAsync()
 {
-    await Task.Delay(1000);
+    await Task.Delay(100);
     Console.WriteLine("1");
 }
