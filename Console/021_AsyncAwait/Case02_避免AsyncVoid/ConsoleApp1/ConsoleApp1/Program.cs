@@ -12,7 +12,6 @@ Console.WriteLine("2");
 
 async void DoAsync()
 {
-    await Task.Delay(100);
     Console.WriteLine("1");
     throw new ApplicationException("Some Error!");
 }
