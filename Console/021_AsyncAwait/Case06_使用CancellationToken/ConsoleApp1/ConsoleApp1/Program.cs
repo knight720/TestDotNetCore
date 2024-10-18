@@ -1,10 +1,8 @@
 ﻿CancellationTokenSource source = new CancellationTokenSource();
-CancellationToken token = source.Token;
 
-var task = DoAsync(token);
+var task = DoAsync(source.Token);
 
-await Task.Delay(1000);
-
+Thread.Sleep(1000);
 Console.WriteLine("2");
 
 //source.Cancel();
@@ -23,7 +21,7 @@ async Task DoAsync(CancellationToken cancellationToken)
     }
     catch (OperationCanceledException ex)
     {
-        Console.WriteLine($"Exception: {ex.Message}");
+        Console.WriteLine($"EX: {ex.Message}");
     }
 
     Console.WriteLine("1");
