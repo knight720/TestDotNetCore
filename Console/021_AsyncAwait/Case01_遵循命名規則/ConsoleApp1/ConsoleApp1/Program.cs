@@ -1,9 +1,9 @@
 ﻿Do();
-//await DoAsync();
+
 Console.WriteLine("2");
 
 async Task Do()
 {
-    await Task.Delay(1000);
+    await Task.Delay(100);
     Console.WriteLine("1");
 }
