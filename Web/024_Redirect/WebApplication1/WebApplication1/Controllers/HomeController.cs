@@ -28,5 +28,17 @@ namespace WebApplication1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult R1()
+        {
+            //// 302
+            return this.Redirect("/run");
+        }
+
+        public IActionResult R2()
+        {
+            //// 302
+            return this.RedirectToAction("index", "run");
+        }
     }
 }
