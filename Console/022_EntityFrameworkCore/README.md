@@ -4,8 +4,9 @@ docker run --rm -it -p 1433:1433 mssql-with-adventureworks
 ```
 
 ## 情境
-- 建立專案
 - 建立和設定模型
+  - 建立專案  
+  - 啟動資料庫
   - EF Power Tools 新增 Product 資料表
 - 群組組態
   - 新增 Customer 資料表(拆分為配置類別)
